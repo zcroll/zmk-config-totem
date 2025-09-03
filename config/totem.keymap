@@ -8,8 +8,8 @@
 //                                                             ▀▀▀▀▀    █  █  █      ▀
 //                                                                      ▀  ▀  ▀
 //
-// Optimized for Python, Vim, and Cybersecurity workflows
-// Layout: Colemak-DH with programming optimizations
+// Optimized for Python, Go, Neovim, Hyprland, Linux workflows
+// Layout: Colemak-DH with programming and terminal optimizations
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
@@ -26,74 +26,96 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
+        
+        td_caps: tap_dance_caps {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TAP_DANCE_CAPS";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp ESC>, <&kp CAPS>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
         
+        // Essential Neovim combos
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <12 13>; // S+T for ESC (Vim essential)
+            key-positions = <12 13>; // S+T = ESC (Neovim mode switching)
             bindings = <&kp ESC>;
         };
         
         combo_colon {
             timeout-ms = <50>;
-            key-positions = <17 18>; // E+I for : (Vim commands)
+            key-positions = <17 18>; // E+I = : (Neovim commands)
             bindings = <&kp COLON>;
         };
         
-        combo_tab {
+        combo_semicolon {
             timeout-ms = <50>;
-            key-positions = <11 12>; // R+S for TAB (Python indentation)
-            bindings = <&kp TAB>;
+            key-positions = <18 19>; // I+O = ; (Go statements)
+            bindings = <&kp SEMI>;
+        };
+        
+        // Python/Go specific
+        combo_underscore {
+            timeout-ms = <50>;
+            key-positions = <15 16>; // N+E = _ (Python naming)
+            bindings = <&kp UNDER>;
+        };
+        
+        combo_pipe {
+            timeout-ms = <50>;
+            key-positions = <6 7>; // L+U = | (Linux pipes)
+            bindings = <&kp PIPE>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Colemak-DH Base (optimized for coding)
+        // Layer 0: Colemak-DH Base (optimized for comfortable coding)
         base {
             display-name = "Base";
             bindings = <
                    &kp Q      &kp W      &kp F      &kp P      &kp B          &kp J      &kp L      &kp U      &kp Y      &kp SEMI
                    &hm LGUI A &hm LALT R &hm LCTL S &hm LSFT T &kp G          &kp M      &hm RSFT N &hm RCTL E &hm RALT I &hm RGUI O
-        &kp LCTRL  &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      &kp COMMA  &kp DOT    &kp SLASH  &kp SQT
-                                         &lt 3 ESC  &lt 1 SPACE &lt 2 TAB     &kp ENTER  &lt 1 BSPC &lt 3 DEL
+        &td_caps   &kp Z      &kp X      &kp C      &kp D      &kp V          &kp K      &kp H      &kp COMMA  &kp DOT    &kp SLASH  &kp SQT
+                                         &lt 3 TAB  &lt 1 SPACE &lt 2 BSPC    &lt 2 ENTER &lt 1 DEL &lt 3 ESC
             >;
         };
 
-        // Layer 1: Numbers & Python Symbols
-        python_symbols {
-            display-name = "Python";
+        // Layer 1: Python/Go Symbols & Numbers
+        code_layer {
+            display-name = "Code";
             bindings = <
                    &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
-                   &kp LBKT   &kp RBKT   &kp LPAR   &kp RPAR   &kp LBRC       &kp RBRC   &kp UNDER  &kp PLUS   &kp PIPE   &kp BSLH
-        &kp GRAVE  &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp STAR   &kp MINUS  &kp EQUAL  &kp DQT
+                   &kp LBKT   &kp RBKT   &kp LPAR   &kp RPAR   &kp LBRC       &kp RBRC   &kp UNDER  &kp PLUS   &kp EQUAL  &kp MINUS
+        &kp GRAVE  &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT      &kp CARET  &kp AMPS   &kp STAR   &kp BSLH   &kp PIPE   &kp DQT
                                          &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
 
-        // Layer 2: Navigation & Vim Controls
-        vim_nav {
-            display-name = "Vim";
+        // Layer 2: Neovim Navigation & Function Keys
+        nav_layer {
+            display-name = "Nav";
             bindings = <
-                   &kp ESC    &kp PG_UP  &kp UP     &kp PG_DN  &kp HOME       &kp END    &kp F7     &kp F8     &kp F9     &kp F10
-                   &kp TAB    &kp LEFT   &kp DOWN   &kp RIGHT  &kp DEL        &kp BSPC   &kp F4     &kp F5     &kp F6     &kp F11
-        &kp LCTL   &kp LALT   &kp LGUI   &kp LSFT   &kp INS    &kp CAPS       &kp F1     &kp F2     &kp F3     &kp F12    &none      &none
+                   &kp F1     &kp F2     &kp F3     &kp F4     &kp F5         &kp F6     &kp F7     &kp F8     &kp F9     &kp F10
+                   &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END        &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp F11
+        &kp TILDE  &kp INS    &kp LEFT   &kp DOWN   &kp RIGHT  &kp CAPS       &kp COLON  &kp LT     &kp GT     &kp QMARK  &none      &kp F12
                                          &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
 
-        // Layer 3: System Controls & Cybersecurity Tools
-        system_cyber {
-            display-name = "System";
+        // Layer 3: Hyprland/System Controls & Terminal
+        system_layer {
+            display-name = "Sys";
             bindings = <
-                   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3    &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp C_PP   &kp C_NEXT
-                   &sys_reset &bootloader   &kp COLON    &kp LT       &kp GT          &kp TILDE  &kp LSFT     &kp LCTL     &kp LALT   &kp LGUI
-        &none      &none      &none         &none        &none        &none           &none      &none        &none        &none      &none      &none
-                                            &trans       &none        &trans          &trans     &none        &trans
+                   &kp ESC    &kp LG(W)  &kp LG(E)  &kp LG(R)  &kp LG(T)      &kp LG(Y)  &kp LG(U)  &kp LG(I)  &kp LG(O)  &kp LG(P)
+                   &kp LG(A)  &kp LG(S)  &kp LG(D)  &kp LG(F)  &kp LG(G)      &kp LG(H)  &kp LG(J)  &kp LG(K)  &kp LG(L)  &kp LG(SEMI)
+        &sys_reset &kp LG(Z)  &kp LG(X)  &kp LG(C)  &kp LG(V)  &kp LG(B)      &kp LG(N)  &kp LG(M)  &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bootloader
+                                         &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
 
@@ -104,7 +126,7 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        system_layer {
+        tri_layer {
             if-layers = <1 2>;
             then-layer = <3>;
         };
