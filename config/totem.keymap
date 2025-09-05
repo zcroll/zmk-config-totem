@@ -1,26 +1,13 @@
-//
-//                                                        ▀▀▀▀▀     ▀▀▀▀▀          ▀▀█▀▀
-//                                                        ▄▀▀▀▄  ▄  ▄▀▀▀▄  ▄  ▄▀▀▀▄  █  ▄▀▀▀▄
-//                                                        █   █  █  █   █  █  █   █  █  █   █
-//                                                         ▀▀▀   █   ▀▀▀   █   ▀▀▀   ▀   ▀▀▀
-//                                                               █      ▄▄▄█▄▄▄    █   █  
-//                                                               ▀      █  █  █     █▄█
+
 //                                                             ▀▀▀▀▀    █  █  █      ▀
 //                                                                      ▀  ▀  ▀
 //
 // Optimized for Python, Go, Neovim, Hyprland, Linux workflows
 // Layout: Colemak-DH with programming and terminal optimizations
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/keys.h>
-/ {
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <175>;
+@@ -26,74 +26,96 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
@@ -33,22 +20,23 @@
             bindings = <&kp ESC>, <&kp CAPS>;
         };
     };
+
     combos {
         compatible = "zmk,combos";
-        
+
         // Essential Neovim combos
         combo_esc {
             timeout-ms = <50>;
             key-positions = <12 13>; // S+T = ESC (Neovim mode switching)
             bindings = <&kp ESC>;
         };
-        
+
         combo_colon {
             timeout-ms = <50>;
             key-positions = <17 18>; // E+I = : (Neovim commands)
             bindings = <&kp COLON>;
         };
-        
+
         combo_semicolon {
             timeout-ms = <50>;
             key-positions = <18 19>; // I+O = ; (Go statements)
@@ -68,8 +56,10 @@
             bindings = <&kp PIPE>;
         };
     };
+
     keymap {
         compatible = "zmk,keymap";
+
         // Layer 0: Colemak-DH Base (optimized for comfortable coding)
         base {
             display-name = "Base";
@@ -80,6 +70,7 @@
                                          &lt 3 TAB  &lt 1 SPACE &lt 2 BSPC    &lt 2 ENTER &lt 1 DEL &lt 3 ESC
             >;
         };
+
         // Layer 1: Python/Go Symbols & Numbers
         code_layer {
             display-name = "Code";
@@ -90,6 +81,7 @@
                                          &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
+
         // Layer 2: Neovim Navigation & Function Keys
         nav_layer {
             display-name = "Nav";
@@ -100,6 +92,7 @@
                                          &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
+
         // Layer 3: Hyprland/System Controls & Terminal
         system_layer {
             display-name = "Sys";
@@ -110,15 +103,12 @@
                                          &trans     &trans     &trans         &trans     &trans     &trans
             >;
         };
-        extra1 { status = "reserved"; };
-        extra2 { status = "reserved"; };
-        extra3 { status = "reserved"; };
-    };
+
+@@ -104,7 +126,7 @@
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
             if-layers = <1 2>;
             then-layer = <3>;
         };
-    };
-};
