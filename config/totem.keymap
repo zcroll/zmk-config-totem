@@ -1,144 +1,73 @@
+//                                                        ▀▀▀▀▀     ▀▀▀▀▀          ▀▀█▀▀
+//                                                        ▄▀▀▀▄  ▄  ▄▀▀▀▄  ▄  ▄▀▀▀▄  █  ▄▀▀▀▄
+//                                                        █   █  █  █   █  █  █   █  █  █   █
+//                                                         ▀▀▀   █   ▀▀▀   █   ▀▀▀   ▀   ▀▀▀
+//                                                               █      ▄▄▄█▄▄▄    █   █  
+//                                                               ▀      █  █  █     █▄█
+//                                                             ▀▀▀▀▀    █  █  █      ▀
+//                                                                      ▀  ▀  ▀
+//
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
 / {
-    behaviors {
-        // Home-row mods – safe documented hold-tap settings
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <160>;
-            quick-tap-ms   = <120>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        hm_r: homerow_mods_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS_RIGHT";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <160>;
-            quick-tap-ms   = <120>;
-            bindings = <&kp>, <&kp>;
-        };
-
-        // Layer-tap thumbs (hold = momentary layer, tap = key)
-        lt_nav: layer_tap_nav {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_NAV";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <120>;
-            bindings = <&mo 1>, <&kp>;
-        };
-
-        lt_sym: layer_tap_sym {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_SYM";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <120>;
-            bindings = <&mo 2>, <&kp>;
-        };
-
-        lt_sys: layer_tap_sys {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_SYS";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <120>;
-            bindings = <&mo 3>, <&kp>;
-        };
-
-        lt_hypr: layer_tap_hypr {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_HYPR";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <150>;
-            quick-tap-ms = <120>;
-            bindings = <&mo 4>, <&kp>;
-        };
-
-        // Optional: quick Caps Word for PYTHON_CONSTANTS
-        caps_word_smart: caps_word_smart {
-            compatible = "zmk,behavior-caps-word";
-            label = "CAPS_WORD_SMART";
-            #binding-cells = <0>;
-            continue-list = <UNDERSCORE MINUS N1 N2 N3 N4 N5 N6 N7 N8 N9 N0>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        // Vim-friendly escape and quick colon
-        combo_esc   { timeout-ms = <30>; key-positions = <12 13>; bindings = <&kp ESC>;   layers = <0 1 2 3 4>; }
-        combo_colon { timeout-ms = <30>; key-positions = <17 18>; bindings = <&kp COLON>; layers = <0>; }
-
-        // Useful programming combos
-        combo_underscore { timeout-ms = <40>; key-positions = <10 11>; bindings = <&kp UNDER>; layers = <0>; }
-        combo_equals     { timeout-ms = <40>; key-positions = <16 17>; bindings = <&kp EQUAL>; layers = <0>; }
-
-        // Emergency: Ctrl+C always reachable
-        combo_ctrl_c { timeout-ms = <30>; key-positions = <22 23>; bindings = <&kp LC(C)>; layers = <0 1 2 3 4>; }
-
-        // Quick Caps Word toggle
-        combo_caps_word { timeout-ms = <50>; key-positions = <13 16>; bindings = <&caps_word_smart>; layers = <0>; }
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Gallium v1 (typing-optimized base)
+        // Layer 0: Gallium-like base (typing-focused)
         base {
             bindings = <
-                &kp B        &kp L        &kp D        &kp C        &kp V           &kp J        &kp Y        &kp O        &kp U        &kp COMMA
-                &hm LCTL N   &hm LALT R   &hm LGUI S   &hm LSHFT T  &kp G           &kp P        &hm_r RSHFT H &hm_r RGUI A &hm_r RALT E &hm_r RCTL I
-                &kp TAB      &kp Q        &kp X        &kp M        &kp W           &kp Z        &kp K        &kp F        &kp SQT      &kp DOT    &kp FSLH   &kp RET
-                                   &lt_sys ESC  &lt_nav SPACE  &lt_sym BSPC   &lt_hypr TAB      &lt_nav ENTER    &lt_sym DEL
+           &kp B   &kp L   &kp D    &kp C   &kp V     &kp J      &kp Y           &kp O          &kp U    &kp COMMA
+           &kp N   &kp R   &kp S    &kp T   &kp G     &kp P      &kp H           &kp A          &kp E    &kp I
+&kp LCTRL  &kp Q  &kp X  &kp M    &kp W  &kp Z     &kp K      &kp F            &kp SQT        &kp DOT  &kp FSLH  &kp APOS
+                         &kp LGUI  &mo 2  &mo 1     &kp SPACE  &kp RSHFT        &kp RALT
             >;
         };
 
-        // Layer 1: Navigation + Numbers (Terminal / Neovim)
-        nav {
+        // Layer 1: Navigation + Numbers (terminal / Neovim)
+        nav_num {
             bindings = <
-                &kp N1      &kp N2      &kp N3      &kp N4      &kp N5        &kp N6      &kp N7      &kp N8      &kp N9      &kp N0
-                &kp LC(A)   &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT     &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &kp LC(E)
-                &kp TAB     &kp LC(Z)   &kp LC(X)   &kp LC(C)   &kp LC(V)     &kp LC(Y)   &kp LC(L)   &kp LC(K)   &kp LC(U)   &kp LC(R)  &kp LC(D) &kp LC(W)
-                                   &trans   &trans    &trans        &trans         &trans          &trans
+                   &kp LA(BSPC)   &kp BSPC   &kp UP    &kp DEL          &kp LA(DEL)        &kp N5    &kp N6      &kp N7    &kp N8   &kp N9
+                   &kp LA(LEFT)   &kp LEFT   &kp DOWN  &kp RIGHT        &kp LA(RIGHT)      &kp N0    &kp N1      &kp N2    &kp N3   &kp N4
+&kp LG(BSPC)  &kp LG(UP)      &kp LG(LEFT)  &kp ENTER  &kp LG(RIGHT)   &kp LG(DOWN)       &kp DOT   &kp PLUS    &kp MINUS &kp STAR &kp FSLH &kp CARET
+                                                      &trans          &trans             &trans                &kp EQUAL &kp RSHFT  &kp PRCNT
             >;
         };
 
-        // Layer 2: Symbols (Python + shell heavy)
-        sym {
+        // Layer 2: Symbols + Function helpers (Python/shell)
+        sym_func {
             bindings = <
-                &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT    &kp CARET   &kp AMPS   &kp STAR   &kp LPAR   &kp RPAR
-                &kp UNDER   &kp MINUS   &kp EQUAL   &kp PLUS    &kp PIPE     &kp BSLH    &kp LBKT   &kp RBKT   &kp LBRC   &kp RBRC
-                &kp TILDE   &kp GRAVE   &kp DQT     &kp SQT     &kp LT       &kp GT      &kp QMARK  &kp COLON  &kp SEMI   &kp COMMA  &kp DOT  &kp FSLH
-                                   &trans   &trans    &trans        &trans         &trans          &trans
+           &kp ESC     &kp LBRC     &kp RBRC     &none    &none      &kp F1  &kp F2   &kp F3  &kp F4  &kp F5
+           &kp TAB     &kp LBKT     &kp RBKT     &kp ENTER &kp BSLH   &kp F6  &kp F7   &kp F8  &kp F9  &kp F10
+&kp GRAVE  &kp LT      &kp LPAR     &kp RPAR     &kp GT    &kp UNDER  &kp F11 &kp F12  &kp F13 &kp F14 &kp F15 &kp F16
+                                &trans         &trans      &trans      &none   &kp RSHFT &none
             >;
         };
 
-        // Layer 3: System / Function keys
-        sys {
+        // Layer 3: Device / Media / Bluetooth management
+        device {
             bindings = <
-                &kp F1    &kp F2    &kp F3    &kp F4    &kp F5     &kp F6    &kp F7    &kp F8    &kp F9    &kp F10
-                &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4     &kp N5    &kp N6    &kp N7    &kp N8    &kp N9
-                &kp LC(Q) &kp LS(F1) &kp LC(TAB) &kp LS(TAB) &kp LC(N) &kp LC(T) &kp LC(W) &kp DEL  &kp INS  &kp PSCRN &kp F11 &kp F12
-                                   &trans  &trans  &trans  &trans  &trans  &trans
+       &none        &kp C_BRI_DN     &kp C_BRI_UP     &none            &none    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+       &kp C_MUTE   &kp C_VOL_DN     &kp C_VOL_UP     &kp C_PP         &none    &none        &none         &none         &none         &none
+&none   &none        &none            &none            &none    &none    &none        &none         &none         &none         &none         &bt BT_CLR
+                                        &none         &none            &none    &none        &none         &none
             >;
         };
 
-        // Layer 4: Hyprland + Media + Bluetooth management
-        hypr {
-            bindings = <
-                &kp LG(N1)  &kp LG(N2)  &kp LG(N3)  &kp LG(N4)  &kp LG(N5)   &kp LG(N6)  &kp LG(N7)  &kp LG(N8)  &kp LG(N9)  &kp LG(N0)
-                &kp LG(H)   &kp LG(J)   &kp LG(K)   &kp LG(L)   &kp LG(F)    &kp C_PP    &kp C_PREV  &kp C_NEXT  &kp C_VOL_DN &kp C_VOL_UP
-                &kp LG(Q)   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &bt BT_CLR &bt BT_PRV &bt BT_NXT &bt BT_DISC &sys_reset &bootloader
-                                   &kp LG(SPACE) &kp LA(SPACE) &kp LG(TAB) &trans &trans &trans
-            >;
+        // Reserved (expand later if needed)
+        extra1 { status = "reserved"; };
+        extra2 { status = "reserved"; };
+        extra3 { status = "reserved"; };
+    };
+
+    // Auto-activate Device layer when both Nav (1) and Symbols (2) are held
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        device {
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 };
