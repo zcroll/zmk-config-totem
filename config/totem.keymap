@@ -1,69 +1,81 @@
-//
-//                                                        ▀▀▀▀▀     ▀▀▀▀▀          ▀▀█▀▀
-//                                                        ▄▀▀▀▄  ▄  ▄▀▀▀▄  ▄  ▄▀▀▀▄  █  ▄▀▀▀▄
-//                                                        █   █  █  █   █  █  █   █  █  █   █
-//                                                         ▀▀▀   █   ▀▀▀   █   ▀▀▀   ▀   ▀▀▀
-//                                                               █      ▄▄▄█▄▄▄    █   █  
-//                                                               ▀      █  █  █     █▄█
-//                                                             ▀▀▀▀▀    █  █  █      ▀
-//                                                                      ▀  ▀  ▀
-//
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/keys.h>
-
 / {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <160>;
+            quick-tap-ms = <120>;
+            require-prior-idle-ms = <80>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-on-release;
+        };
+        lt_nav: layer_tap_nav {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_NAV";
+            #binding-cells = <2>;
+            tapping-term-ms = <160>;
+            quick-tap-ms = <120>;
+            flavor = "tap-preferred";
+            bindings = <&mo 1>, <&kp>;
+        };
+        lt_sym: layer_tap_sym {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_SYM";
+            #binding-cells = <2>;
+            tapping-term-ms = <160>;
+            quick-tap-ms = <120>;
+            flavor = "tap-preferred";
+            bindings = <&mo 2>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
-
         base {
             bindings = <
-           &kp Q  &kp W  &kp E     &kp R  &kp T    &kp Y      &kp U            &kp I          &kp O    &kp P
-           &kp A  &kp S  &kp D     &kp F  &kp G    &kp H      &kp J            &kp K          &kp L    &kp SEMI
-&kp LCTRL  &kp Z  &kp X  &kp C     &kp V  &kp B    &kp N      &kp M            &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
-                         &kp LGUI  &mo 2  &mo 1    &kp SPACE  &kp RIGHT_SHIFT  &kp RIGHT_ALT
+                &kp Q   &kp W   &kp E   &kp R   &kp T    &kp Y     &kp U   &kp I   &kp O   &kp P
+                &kp A   &kp S   &kp D   &kp F   &kp G    &kp H     &kp J   &kp K   &kp L   &kp SEMI
+                &kp LCTRL &kp Z &kp X   &kp C   &kp V    &kp B     &kp N   &kp M   &kp COMMA &kp DOT &kp FSLH &kp APOS
+                                    &kp LGUI   &lt_sym SPACE   &lt_nav ENTER   &kp BSPC  &kp RIGHT_SHIFT &kp RIGHT_ALT
             >;
         };
 
         nav_num {
             bindings = <
-                   &kp LA(BACKSPACE)   &kp BACKSPACE  &kp UP     &kp DELETE     &kp LA(DELETE)        &kp N5      &kp N6           &kp N7       &kp N8    &kp N9
-                   &kp LA(LEFT_ARROW)  &kp LEFT       &kp DOWN   &kp RIGHT      &kp LA(RIGHT)         &kp N0      &kp N1           &kp N2       &kp N3    &kp N4
-&kp LG(BACKSPACE)  &kp LG(UP_ARROW)    &kp LG(LEFT)   &kp ENTER  &kp LG(RIGHT)  &kp LG(DOWN_ARROW)    &kp PERIOD  &kp PLUS         &kp MINUS    &kp STAR  &kp FSLH  &kp CARET
-                                                      &trans     &trans         &trans                &kp EQUAL   &kp RIGHT_SHIFT  &kp PERCENT
+                &kp LA(BACKSPACE)  &kp BACKSPACE  &kp UP     &kp DELETE         &kp LA(DELETE)      &kp N5     &kp N6   &kp N7   &kp N8   &kp N9
+                &kp LA(LEFT)       &kp LEFT       &kp DOWN   &kp RIGHT          &kp LA(RIGHT)       &kp N0     &kp N1   &kp N2   &kp N3   &kp N4
+                &kp LG(BACKSPACE)  &kp LG(UP)     &kp LG(LEFT) &kp ENTER        &kp LG(RIGHT)       &kp LG(DOWN) &kp PERIOD &kp PLUS &kp MINUS &kp STAR &kp FSLH &kp CARET
+                                    &trans        &trans      &trans             &kp EQUAL           &kp RIGHT_SHIFT &kp PERCENT
             >;
         };
 
         sym_func {
             bindings = <
-           &kp ESC        &kp LEFT_BRACE        &kp RIGHT_BRACE        &none             &none             &kp F1   &kp F2           &kp F3   &kp F4   &kp F5
-           &kp TAB        &kp LBKT              &kp RBKT               &kp ENTER         &kp BSLH          &kp F6   &kp F7           &kp F8   &kp F9   &kp F10
-&kp GRAVE  &kp LESS_THAN  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp GREATER_THAN  &kp UNDERSCORE    &kp F11  &kp F12          &kp F13  &kp F14  &kp F15  &kp F16
-                                                &trans                 &trans            &trans            &none    &kp RIGHT_SHIFT  &none
+                &kp ESC       &kp LBRC      &kp RBRC     &none          &none      &kp F1   &kp F2   &kp F3   &kp F4   &kp F5
+                &kp TAB       &kp LBKT      &kp RBKT     &kp ENTER      &kp BSLH   &kp F6   &kp F7   &kp F8   &kp F9   &kp F10
+                &kp GRAVE     &kp LT        &kp LPAR     &kp RPAR       &kp GT     &kp UNDER &kp F11 &kp F12  &kp F13  &kp F14  &kp F15  &kp F16
+                                    &trans   &trans      &trans         &none      &kp RIGHT_SHIFT &none
             >;
         };
 
         device {
             bindings = <
-       &none       &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &none             &none    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-       &kp K_MUTE  &kp C_VOLUME_DOWN     &kp C_VOLUME_UP       &kp C_PLAY_PAUSE  &none    &none         &none         &none         &none         &none
-&none  &none       &none                 &none                 &none             &none    &none         &none         &none         &none         &none         &bt BT_CLR
-                                         &none                 &none             &none    &none         &none         &none
+                &none             &kp C_BRIGHTNESS_DEC &kp C_BRIGHTNESS_INC   &none         &none           &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4
+                &kp K_MUTE        &kp C_VOLUME_DOWN    &kp C_VOLUME_UP        &kp C_PLAY_PAUSE &none        &none        &none        &none        &none        &none
+                &none             &none                &none                  &none          &none          &none        &none        &none        &none        &none        &none        &bt BT_CLR
+                            &none   &none   &none   &none   &none   &none
             >;
         };
 
         extra1 { status = "reserved"; };
-
         extra2 { status = "reserved"; };
-
         extra3 { status = "reserved"; };
     };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-
         device {
             if-layers = <1 2>;
             then-layer = <3>;
