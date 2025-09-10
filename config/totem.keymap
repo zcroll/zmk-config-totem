@@ -1,25 +1,29 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+
 / {
     keymap {
         compatible = "zmk,keymap";
+
         base {
             bindings = <
-           &kp Q  &kp W  &kp F     &kp P  &kp G    &kp J      &kp L            &kp U          &kp Y    &kp SEMI
-           &mt LSHIFT A  &mt LCTRL R  &mt LALT S     &mt LGUI T  &kp D    &kp H      &mt RGUI N       &mt RALT E     &mt RCTRL I    &mt RSHIFT O
-&kp LCTRL  &kp Z  &kp X  &kp C     &kp V  &kp B    &kp K      &kp M            &kp COMMA      &kp DOT  &kp FSLH  &kp APOS
-                         &kp LGUI  &mo 2  &mo 1    &kp SPACE  &kp RIGHT_SHIFT  &kp RIGHT_ALT
+           &kp Q         &kp W        &kp F        &kp P       &kp G    &kp J      &kp L            &kp U          &kp Y        &kp SEMI
+           &mt LSHIFT A  &mt LCTRL R  &mt LSHFT S  &mt LGUI T  &kp D    &kp H      &mt RGUI N       &mt RSHFT E    &mt RCTRL I  &mt RSHIFT O
+&kp LCTRL  &kp Z         &kp X        &kp C        &kp V       &kp B    &kp K      &kp M            &kp COMMA      &kp DOT      &kp FSLH      &kp APOS
+                                      &kp LGUI     &mo 2       &mo 1    &kp SPACE  &kp RIGHT_SHIFT  &kp RIGHT_ALT
             >;
         };
+
         nav_num {
             bindings = <
-                   &kp LA(BACKSPACE)   &kp BACKSPACE  &kp UP     &kp DELETE     &kp LA(DELETE)        &kp N7      &kp N8           &kp N9       &kp FSLH  &kp STAR
-                   &kp LA(LEFT_ARROW)  &kp LEFT       &kp DOWN   &kp RIGHT      &kp LA(RIGHT)         &kp N4      &kp N5           &kp N6       &kp MINUS &kp EQUAL
-&kp LG(BACKSPACE)  &kp LG(UP_ARROW)    &kp LG(LEFT)   &kp ENTER  &kp LG(RIGHT)  &kp LG(DOWN_ARROW)    &kp N1      &kp N2           &kp N3       &kp PLUS  &kp PERIOD  &kp CARET
-                                                      &trans     &trans         &trans                &kp N0      &kp RIGHT_SHIFT  &kp PERCENT
+                   &kp LA(BACKSPACE)   &kp BACKSPACE  &kp UP     &kp DELETE     &kp LA(DELETE)        &kp N7  &kp N8           &kp N9       &kp FSLH   &kp STAR
+                   &kp LA(LEFT_ARROW)  &kp LEFT       &kp DOWN   &kp RIGHT      &kp LA(RIGHT)         &kp N4  &kp N5           &kp N6       &kp MINUS  &kp EQUAL
+&kp LG(BACKSPACE)  &kp LG(UP_ARROW)    &kp LG(LEFT)   &kp ENTER  &kp LG(RIGHT)  &kp LG(DOWN_ARROW)    &kp N1  &kp N2           &kp N3       &kp PLUS   &kp PERIOD  &kp CARET
+                                                      &trans     &trans         &trans                &kp N0  &kp RIGHT_SHIFT  &kp PERCENT
             >;
         };
+
         sym_func {
             bindings = <
            &kp ESC        &kp LEFT_BRACE        &kp RIGHT_BRACE        &none             &none             &kp F1   &kp F2           &kp F3   &kp F4   &kp F5
@@ -28,6 +32,7 @@
                                                 &trans                 &trans            &trans            &none    &kp RIGHT_SHIFT  &none
             >;
         };
+
         device {
             bindings = <
        &none       &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &none             &none    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
@@ -36,12 +41,17 @@
                                          &none                 &none             &none    &none         &none         &none
             >;
         };
+
         extra1 { status = "reserved"; };
+
         extra2 { status = "reserved"; };
+
         extra3 { status = "reserved"; };
     };
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
+
         device {
             if-layers = <1 2>;
             then-layer = <3>;
