@@ -3,10 +3,7 @@
  * SPDX-License-Identifier: MIT
  * 
  * TOTEM KEYBOARD - Optimized for Comfort & Speed
- * Base: Your exact Colemak-DH layout (unchanged)
- * Navigation: Miryoku-inspired (community standard)
- * Symbols: Frequency-optimized for programming
- * Settings: Based on urob's timeless mods + community best practices
+ * Most used symbols on home row + easy-reach combos for coding
  */
 
 #include <behaviors.dtsi>
@@ -26,7 +23,6 @@
 
 / {
     behaviors {
-        // Optimized home row mods - community proven timings
         hml: homerow_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -51,7 +47,6 @@
             hold-trigger-on-release;
         };
 
-        // Comfortable thumb layer taps
         lt_nav: layer_tap_nav {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -70,7 +65,6 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // Smart shift - tap for sticky shift, double-tap for caps word
         smart_shft: smart_shift {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -82,29 +76,237 @@
     combos {
         compatible = "zmk,combos";
         
-        // Essential combos only - prevent accidental triggers
-        combo_esc {
+        // ========== BRACKETS (with cursor inside) ==========
+        combo_parens {
             timeout-ms = <50>;
-            key-positions = <14 15>; // R+S
-            bindings = <&kp ESC>;
+            key-positions = <19 20>; // N+E → ()
+            bindings = <&macro_parens>;
             require-prior-idle-ms = <150>;
-            layers = <BASE>;
+        };
+        
+        combo_brackets {
+            timeout-ms = <50>;
+            key-positions = <20 21>; // E+I → []
+            bindings = <&macro_brackets>;
+            require-prior-idle-ms = <150>;
+        };
+        
+        combo_braces {
+            timeout-ms = <50>;
+            key-positions = <21 22>; // I+O → {}
+            bindings = <&macro_braces>;
+            require-prior-idle-ms = <150>;
         };
 
-        combo_ret {
+        // ========== ESSENTIAL KEYS ==========
+        combo_esc {
             timeout-ms = <50>;
-            key-positions = <19 20>; // N+E
-            bindings = <&kp RET>;
+            key-positions = <14 15>; // R+S → ESC (Vim exit)
+            bindings = <&kp ESC>;
             require-prior-idle-ms = <150>;
-            layers = <BASE>;
         };
 
         combo_tab {
             timeout-ms = <50>;
-            key-positions = <15 16>; // S+T
+            key-positions = <15 16>; // S+T → TAB (completion)
             bindings = <&kp TAB>;
             require-prior-idle-ms = <150>;
-            layers = <BASE>;
+        };
+
+        combo_ret {
+            timeout-ms = <50>;
+            key-positions = <16 17>; // T+D → ENTER (quick confirm)
+            bindings = <&kp RET>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ========== MOST USED SYMBOLS ==========
+        combo_colon {
+            timeout-ms = <50>;
+            key-positions = <7 8>; // L+U → : (Python dicts, type hints)
+            bindings = <&kp COLON>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_semicolon {
+            timeout-ms = <50>;
+            key-positions = <8 9>; // U+Y → ; (statement end)
+            bindings = <&kp SEMI>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_equal {
+            timeout-ms = <50>;
+            key-positions = <6 7>; // J+L → = (assignment)
+            bindings = <&kp EQUAL>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_underscore {
+            timeout-ms = <50>;
+            key-positions = <28 29>; // V+B → _ (snake_case)
+            bindings = <&kp UNDER>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_minus {
+            timeout-ms = <50>;
+            key-positions = <27 28>; // C+V → -
+            bindings = <&kp MINUS>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_plus {
+            timeout-ms = <50>;
+            key-positions = <31 32>; // M+, → +
+            bindings = <&kp PLUS>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ========== PROGRAMMING PATTERNS ==========
+        combo_double_equal {
+            timeout-ms = <50>;
+            key-positions = <6 8>; // J+U → == (comparison)
+            bindings = <&macro_double_equal>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_not_equal {
+            timeout-ms = <50>;
+            key-positions = <2 3>; // W+F → !=
+            bindings = <&macro_not_equal>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_arrow_func {
+            timeout-ms = <50>;
+            key-positions = <33 34>; // .+/ → => (arrow function)
+            bindings = <&macro_arrow>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_dunder {
+            timeout-ms = <50>;
+            key-positions = <26 27>; // X+C → __ (Python dunder)
+            bindings = <&macro_dunder>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_pipe {
+            timeout-ms = <50>;
+            key-positions = <18 19>; // H+N → | (shell pipes)
+            bindings = <&kp PIPE>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ========== CLIPBOARD ==========
+        combo_copy {
+            timeout-ms = <50>;
+            key-positions = <26 30>; // X+K → Ctrl+C
+            bindings = <&kp LC(C)>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_paste {
+            timeout-ms = <50>;
+            key-positions = <28 30>; // V+K → Ctrl+V
+            bindings = <&kp LC(V)>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_cut {
+            timeout-ms = <50>;
+            key-positions = <26 28>; // X+V → Ctrl+X
+            bindings = <&kp LC(X)>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_undo {
+            timeout-ms = <50>;
+            key-positions = <25 26>; // Z+X → Ctrl+Z
+            bindings = <&kp LC(Z)>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ========== VIM SHORTCUTS ==========
+        combo_vim_save {
+            timeout-ms = <50>;
+            key-positions = <14 16>; // R+T → :w (save)
+            bindings = <&macro_vim_save>;
+            require-prior-idle-ms = <150>;
+        };
+
+        combo_vim_quit {
+            timeout-ms = <50>;
+            key-positions = <1 2>; // Q+W → :q (quit)
+            bindings = <&macro_vim_quit>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ========== CAPS WORD ==========
+        combo_caps_word {
+            timeout-ms = <50>;
+            key-positions = <16 19>; // T+H → CAPS_WORD (for CONSTANTS)
+            bindings = <&caps_word>;
+        };
+    };
+
+    macros {
+        // Brackets with cursor inside
+        macro_parens: macro_parens {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR &kp RPAR &kp LEFT>;
+        };
+        
+        macro_brackets: macro_brackets {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LBKT &kp RBKT &kp LEFT>;
+        };
+        
+        macro_braces: macro_braces {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LBRC &kp RBRC &kp LEFT>;
+        };
+
+        // Programming operators
+        macro_double_equal: macro_double_equal {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp EQUAL>;
+        };
+
+        macro_not_equal: macro_not_equal {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EXCL &kp EQUAL>;
+        };
+
+        macro_arrow: macro_arrow {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp GT>;
+        };
+
+        macro_dunder: macro_dunder {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp UNDER &kp UNDER>;
+        };
+
+        // Vim shortcuts
+        macro_vim_save: macro_vim_save {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp W &kp RET>;
+        };
+
+        macro_vim_quit: macro_vim_quit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp Q &kp RET>;
         };
     };
 
@@ -112,7 +314,7 @@
         compatible = "zmk,keymap";
 
         // ==================================================================
-        // BASE LAYER - Your exact layout (unchanged)
+        // BASE LAYER - Your exact Colemak-DH (unchanged)
         // ==================================================================
         base_layer {
             label = "BASE";
@@ -125,9 +327,7 @@
         };
 
         // ==================================================================
-        // NAV LAYER - Miryoku-inspired navigation (community standard)
-        // Right hand: arrows on home row, page/home/end on top
-        // Left hand: modifiers ready for combinations
+        // NAV LAYER - Miryoku-inspired navigation
         // ==================================================================
         nav_layer {
             label = "NAV";
@@ -140,14 +340,13 @@
         };
 
         // ==================================================================
-        // SYM LAYER - Frequency-optimized for programming
-        // Most used symbols on home row for minimal finger movement
+        // SYM LAYER - Most used symbols on home row
         // ==================================================================
         sym_layer {
             label = "SYM";
             bindings = <
            &kp EXCL   &kp AT     &kp HASH   &kp DLLR   &kp PRCNT         &kp CARET  &kp AMPS   &kp STAR   &kp LPAR   &kp RPAR
-           &kp COLON  &kp MINUS  &kp EQUAL  &kp UNDER  &kp PLUS          &kp PIPE   &kp LBRC   &kp RBRC   &kp LBKT   &kp RBKT
+           &kp EQUAL  &kp MINUS  &kp PLUS   &kp UNDER  &kp COLON         &kp LBKT   &kp RBKT   &kp LBRC   &kp RBRC   &kp PIPE
 &trans     &kp GRAVE  &kp TILDE  &kp LT     &kp GT     &kp BSLH          &kp FSLH   &kp SQT    &kp DQT    &kp QMARK  &kp SEMI  &trans
                                  &trans     &trans                       &trans     &trans
             >;
@@ -155,7 +354,6 @@
 
         // ==================================================================
         // NUM LAYER - Numbers + F-keys
-        // Number row on top, numpad style on right for choice
         // ==================================================================
         num_layer {
             label = "NUM";
@@ -184,7 +382,6 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
         
-        // Both NAV and SYM active = FUN layer
         tri_layer {
             if-layers = <NAV SYM>;
             then-layer = <FUN>;
