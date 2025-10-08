@@ -19,7 +19,7 @@
                 #define THUMBS 36 37 38 39
 
                 behaviors {
-                    // Timeless homerow mods
+                    // Timeless home-row mods
                     hml: homerow_mod_left {
                         compatible = "zmk,behavior-hold-tap";
                         #binding-cells = <2>;
@@ -71,7 +71,7 @@
                         bindings = <
            &kp Q  &kp W           &kp F        &kp P        &kp G             &kp J                &kp L            &kp U          &kp Y            &kp SEMI
            &kp A  &mt LEFT_ALT R  &mt LCTRL S  &mt LSHFT T  &mt LEFT_GUI D    &mt RIGHT_COMMAND H  &mt RSHFT N      &mt RCTRL E    &mt RIGHT_ALT I  &kp O
-&kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
+           &kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
                                   &kp LGUI     &lt_hack HACK    &lt_term TERM    &kp SPACE            &kp RIGHT_SHIFT  &kp RIGHT_ALT
                         >;
                     };
@@ -79,7 +79,7 @@
                     // Layer 1: HACK - Penetration testing symbols & shortcuts
                     hacking_layer {
                         bindings = <
-             &trans        &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &trans
+             &trans        &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &kp COLON
              &trans        &kp PIPE      &kp SQT       &kp DQT       &kp UNDER     &kp MINUS         &kp EQUAL     &kp LBKT      &kp RBKT      &kp LBRC      &kp RBRC      &kp COLON
              &trans        &kp GRAVE     &kp TILDE     &kp LT        &kp GT        &kp PLUS          &kp BSLH      &kp FSLH      &kp QMARK     &kp COMMA     &kp DOT       &kp DEL
                                                    &trans        &trans                          &trans       &trans
@@ -198,14 +198,36 @@
                 };
 
                 macros {
-                    compatible = "zmk,behavior-macro";
-                    #binding-cells = <0>;
-                    nmap_scan: nmap_scan { bindings = <&kp N &kp M &kp A &kp P &kp SPACE &kp MINUS &kp S &kp S &kp SPACE>; };
-                    netcat_cmd: netcat_cmd { bindings = <&kp N &kp C &kp SPACE &kp MINUS &kp L &kp V &kp N &kp P &kp SPACE>; };
-                    sudo_cmd: sudo_cmd { bindings = <&kp S &kp U &kp D &kp O &kp SPACE>; };
-                    home_dir: home_dir { bindings = <&kp C &kp D &kp SPACE &kp TILDE>; };
-                    parent_dir: parent_dir { bindings = <&kp C &kp D &kp SPACE &kp DOT &kp DOT>; };
-                    vim_save_quit: vim_save_quit { bindings = <&kp COLON &kp W &kp Q>; };
+                    nmap_scan: nmap_scan {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp N &kp M &kp A &kp P &kp SPACE &kp MINUS &kp S &kp S &kp SPACE>;
+                    };
+                    netcat_cmd: netcat_cmd {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp N &kp C &kp SPACE &kp MINUS &kp L &kp V &kp N &kp P &kp SPACE>;
+                    };
+                    sudo_cmd: sudo_cmd {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp S &kp U &kp D &kp O &kp SPACE>;
+                    };
+                    home_dir: home_dir {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp C &kp D &kp SPACE &kp TILDE>;
+                    };
+                    parent_dir: parent_dir {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp C &kp D &kp SPACE &kp DOT &kp DOT>;
+                    };
+                    vim_save_quit: vim_save_quit {
+                        compatible = "zmk,behavior-macro";
+                        #binding-cells = <0>;
+                        bindings = <&kp COLON &kp W &kp Q>;
+                    };
                 };
             };
         };
