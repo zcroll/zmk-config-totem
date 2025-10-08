@@ -4,130 +4,49 @@
 
 / {
     behaviors {
-        // Comfortable layer-tap for space - balanced for fast typing
-        lt_spc: layer_tap_space {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <180>;
-            quick-tap-ms = <125>;
-            global-quick-tap;
-            bindings = <&mo>, <&kp>;
-        };
-
-        // Comfortable layer-tap for backspace - tap preferred for comfort
-        lt_bspc: layer_tap_backspace {
+        // Super comfortable thumb layer-tap - prioritizes tap for daily use
+        easy_thumb: easy_thumb_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            quick-tap-ms = <150>;
+            tapping-term-ms = <220>;
+            quick-tap-ms = <175>;
             bindings = <&mo>, <&kp>;
-        };
-    };
-
-    combos {
-        compatible = "zmk,combos";
-        
-        // Python brackets - most comfortable positions
-        combo_parens {
-            timeout-ms = <50>;
-            key-positions = <6 7>;  // H+N (easy reach)
-            bindings = <&macro_parens>;
-            layers = <0>;
-        };
-        
-        combo_brackets {
-            timeout-ms = <50>;
-            key-positions = <7 8>;  // N+E
-            bindings = <&macro_brackets>;
-            layers = <0>;
-        };
-        
-        combo_braces {
-            timeout-ms = <50>;
-            key-positions = <8 9>;  // E+I
-            bindings = <&macro_braces>;
-            layers = <0>;
-        };
-
-        // Python double underscore
-        combo_dunder {
-            timeout-ms = <50>;
-            key-positions = <13 14>;  // C+V
-            bindings = <&macro_dunder>;
-            layers = <0>;
-        };
-
-        // Quick ESC for Vim
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <1 2>;  // W+F
-            bindings = <&kp ESC>;
-            layers = <0>;
-        };
-    };
-
-    macros {
-        macro_parens: macro_parens {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LPAR &kp RPAR &kp LEFT>;
-        };
-        
-        macro_brackets: macro_brackets {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBKT &kp RBKT &kp LEFT>;
-        };
-        
-        macro_braces: macro_braces {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LBRC &kp RBRC &kp LEFT>;
-        };
-
-        macro_dunder: macro_dunder {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp UNDER &kp UNDER>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // LAYER 0: BASE - Keep your original Colemak layout
+        // LAYER 0: BASE - Your original layout
         base {
             bindings = <
            &kp Q  &kp W           &kp F        &kp P        &kp G             &kp J                &kp L            &kp U          &kp Y            &kp SEMI
            &kp A  &mt LEFT_ALT R  &mt LCTRL S  &mt LSHFT T  &mt LEFT_GUI D    &mt RIGHT_COMMAND H  &mt RSHFT N      &mt RCTRL E    &mt RIGHT_ALT I  &kp O
 &kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
-                                  &kp LGUI     &lt_spc 2 SPACE  &lt_bspc 1 BSPC    &mo 3              &kp RIGHT_SHIFT  &kp RIGHT_ALT
+                                  &kp LGUI     &kp SPACE    &kp BSPC          &easy_thumb 1 DEL    &kp RIGHT_SHIFT  &kp RIGHT_ALT
             >;
         };
 
-        // LAYER 1: SYMBOLS - Python Optimized, Easy Access
+        // LAYER 1: SYMBOLS - Only when you need them
         nav_num {
             bindings = <
-                   &kp EXCL            &kp AT         &kp HASH       &kp DLLR       &kp PRCNT         &kp CARET    &kp AMPS         &kp STAR     &kp LPAR   &kp RPAR
-                   &kp COLON           &kp SQT        &kp DQT        &kp UNDER      &kp MINUS         &kp EQUAL    &kp LBKT         &kp RBKT     &kp LBRC   &kp RBRC
-&kp PIPE           &kp GRAVE           &kp TILDE      &kp LT         &kp GT         &kp PLUS          &kp BSLH     &kp FSLH         &kp QMARK    &kp DOT    &kp COMMA   &trans
-                                                      &trans         &kp SPACE      &trans            &kp DEL      &kp RIGHT_SHIFT  &trans
+                   &kp N1         &kp N2         &kp N3     &kp N4     &kp N5        &kp N6  &kp N7           &kp N8       &kp N9   &kp N0
+                   &kp EXCL       &kp AT         &kp HASH   &kp DLLR   &kp PRCNT     &kp LBKT &kp RBKT        &kp LPAR     &kp RPAR &kp EQUAL
+&kp ESC            &kp COLON      &kp SQT        &kp DQT    &kp UNDER  &kp MINUS     &kp LBRC &kp RBRC        &kp PLUS     &kp STAR &kp FSLH   &trans
+                                                 &trans     &trans     &trans        &trans   &kp RIGHT_SHIFT &trans
             >;
         };
 
-        // LAYER 2: NUMBERS - Keep numbers but add better navigation
         sym_func {
             bindings = <
-           &kp N1         &kp N2                &kp N3                 &kp N4            &kp N5            &kp N6   &kp N7           &kp N8   &kp N9   &kp N0
-           &kp LEFT       &kp DOWN              &kp UP                 &kp RIGHT         &kp HOME          &kp END  &kp N4           &kp N5   &kp N6   &kp MINUS
-&kp PG_UP  &kp PG_DN      &kp LC(LEFT)          &kp LC(RIGHT)          &kp LC(UP)        &kp LC(DOWN)      &kp PLUS &kp N1           &kp N2   &kp N3   &kp DOT     &kp EQUAL
-                                                &trans                 &trans            &trans            &kp N0   &kp RIGHT_SHIFT  &trans
+           &kp ESC        &kp LEFT_BRACE        &kp RIGHT_BRACE        &none             &none             &kp F1   &kp F2           &kp F3   &kp F4   &kp F5
+           &kp TAB        &kp LBKT              &kp RBKT               &kp ENTER         &kp BSLH          &kp F6   &kp F7           &kp F8   &kp F9   &kp F10
+&kp GRAVE  &kp LESS_THAN  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp GREATER_THAN  &kp UNDERSCORE    &kp F11  &kp F12          &kp F13  &kp F14  &kp F15  &kp F16
+                                                &trans                 &trans            &trans            &none    &kp RIGHT_SHIFT  &none
             >;
         };
 
-        // LAYER 3: DEVICE - Keep your existing device layer
         device {
             bindings = <
        &none       &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &none             &none    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
