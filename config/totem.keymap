@@ -1,6 +1,6 @@
 /*
- * ULTIMATE TOTEM CONFIGURATION - Global for All Coding Scenarios
- * Based on extensive research: urob's timeless mods + Miryoku principles + Programming optimizations
+ * ULTIMATE TOTEM CONFIGURATION - Based on YOUR Colemak-DH Layout
+ * Your exact letter layout + urob's timeless mods + Programming optimizations
  * Optimized for: Python, JavaScript, C/C++, Rust, Go, Java, Shell scripting, LazyVim, terminal work
  */
 
@@ -14,7 +14,6 @@
 #define SYM  1  // Symbols - Programming optimized
 #define NUM  2  // Numbers + Navigation
 #define FUN  3  // Functions + System
-#define EXTRA 4 // Extra layer for advanced features
 
 // Totem 38-key positions
 #define KEYS_L  0  1  2  3  4  5 12 13 14 15 16 17 24 25 26 27 28 29
@@ -89,46 +88,46 @@
     combos {
         compatible = "zmk,combos";
 
-        // PROGRAMMING BRACKETS - Most critical, home row placement
+        // PROGRAMMING BRACKETS - Based on YOUR Colemak-DH positions
         combo_parens {
             timeout-ms = <50>;
-            key-positions = <19 20>; // N+E (right home row)
+            key-positions = <19 20>; // N+E (Colemak home row)
             bindings = <&bracket_pair LPAR RPAR>;
             require-prior-idle-ms = <150>;
         };
         
         combo_brackets {
             timeout-ms = <50>;
-            key-positions = <20 21>; // E+I
+            key-positions = <20 21>; // E+I (Colemak)
             bindings = <&bracket_pair LBKT RBKT>;
             require-prior-idle-ms = <150>;
         };
         
         combo_braces {
             timeout-ms = <50>;
-            key-positions = <21 22>; // I+O
+            key-positions = <21 22>; // I+O (Colemak)
             bindings = <&bracket_pair LBRC RBRC>;
             require-prior-idle-ms = <150>;
         };
 
         combo_angle_brackets {
             timeout-ms = <50>;
-            key-positions = <18 19>; // M+N (for C++ templates, Rust generics)
+            key-positions = <18 19>; // H+N (for C++ templates, Rust generics)
             bindings = <&bracket_pair LT GT>;
             require-prior-idle-ms = <150>;
         };
 
-        // MOST FREQUENT PROGRAMMING SYMBOLS - Based on frequency analysis
+        // COLEMAK-OPTIMIZED SYMBOL COMBOS
         combo_semicolon {
             timeout-ms = <50>;
-            key-positions = <8 9>; // U+Y (natural for C-family languages)
+            key-positions = <8 9>; // U+Y (natural flow in Colemak)
             bindings = <&kp SEMI>;
             require-prior-idle-ms = <150>;
         };
 
         combo_colon {
             timeout-ms = <50>;
-            key-positions = <7 8>; // L+U (Python dictionaries, CSS)
+            key-positions = <7 8>; // L+U (Python dictionaries)
             bindings = <&kp COLON>;
             require-prior-idle-ms = <150>;
         };
@@ -142,29 +141,29 @@
 
         combo_underscore {
             timeout-ms = <50>;
-            key-positions = <27 28>; // V+B (snake_case variables)
+            key-positions = <28 29>; // V+B (snake_case variables)
             bindings = <&kp UNDER>;
             require-prior-idle-ms = <150>;
         };
 
         combo_minus {
             timeout-ms = <50>;
-            key-positions = <26 27>; // C+V (subtraction, CSS properties)
+            key-positions = <27 28>; // V+B area (subtraction)
             bindings = <&kp MINUS>;
             require-prior-idle-ms = <150>;
         };
 
         combo_plus {
             timeout-ms = <50>;
-            key-positions = <31 32>; // H+comma (addition)
+            key-positions = <31 32>; // M+comma (addition)
             bindings = <&kp PLUS>;
             require-prior-idle-ms = <150>;
         };
 
-        // PYTHON-SPECIFIC OPTIMIZATIONS
+        // PYTHON-SPECIFIC OPTIMIZATIONS (Colemak positions)
         combo_dunder {
             timeout-ms = <50>;
-            key-positions = <25 26>; // X+C (Python __init__, __main__)
+            key-positions = <26 27>; // C+V (Python __init__, __main__)
             bindings = <&double_under>;
             require-prior-idle-ms = <150>;
         };
@@ -178,44 +177,44 @@
 
         combo_not_equal {
             timeout-ms = <50>;
-            key-positions = <1 2>; // W+F (!=)
+            key-positions = <2 3>; // W+F (!=) - easy reach in Colemak
             bindings = <&not_equal>;
             require-prior-idle-ms = <150>;
         };
 
-        // VIM/LAZYVIM ESSENTIALS
+        // VIM/LAZYVIM ESSENTIALS (Colemak optimized)
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <13 14>; // R+S (quick escape)
+            key-positions = <14 15>; // R+S (quick escape - Colemak home)
             bindings = <&kp ESC>;
             require-prior-idle-ms = <150>;
         };
 
         combo_tab {
             timeout-ms = <50>;
-            key-positions = <14 15>; // S+T (completion)
+            key-positions = <15 16>; // S+T (completion - Colemak home)
             bindings = <&kp TAB>;
             require-prior-idle-ms = <150>;
         };
 
-        // DEVELOPER WORKFLOW
+        // DEVELOPER WORKFLOW (Colemak positions)
         combo_copy {
             timeout-ms = <50>;
-            key-positions = <26 28>; // C+B (Ctrl+C)
+            key-positions = <26 29>; // C+K (Ctrl+C)
             bindings = <&kp LC(C)>;
             require-prior-idle-ms = <150>;
         };
 
         combo_paste {
             timeout-ms = <50>;
-            key-positions = <27 29>; // V+K (Ctrl+V)
+            key-positions = <28 30>; // V+K (Ctrl+V)
             bindings = <&kp LC(V)>;
             require-prior-idle-ms = <150>;
         };
 
         combo_caps_word {
             timeout-ms = <50>;
-            key-positions = <15 20>; // T+E (for CONSTANTS)
+            key-positions = <16 20>; // T+E (for CONSTANTS)
             bindings = <&caps_word>;
         };
     };
@@ -251,18 +250,6 @@
             bindings = <&kp EXCL &kp EQUAL>;
         };
 
-        greater_equal: greater_equal {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp GT &kp EQUAL>;
-        };
-
-        less_equal: less_equal {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LT &kp EQUAL>;
-        };
-
         // SHELL/TERMINAL
         pipe_pipe: pipe_pipe {
             compatible = "zmk,behavior-macro";
@@ -281,7 +268,7 @@
         compatible = "zmk,keymap";
 
         // ===================================================================
-        // LAYER 0: BASE - Your familiar Colemak layout with timeless HRMs
+        // LAYER 0: YOUR EXACT COLEMAK-DH LAYOUT with timeless HRMs
         // ===================================================================
         base_layer {
             display-name = "Base";
@@ -304,7 +291,7 @@
         symbol_layer {
             display-name = "Sym";
             bindings = <
-        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬──────────────────────────┬─────────────╮
              &trans        &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &trans
         // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
              &trans        &kp COLON     &kp SQT       &kp DQT       &kp UNDER     &kp MINUS         &kp EQUAL     &kp LBKT      &kp RBKT      &kp LBRC      &kp RBRC      &kp PIPE
@@ -351,8 +338,6 @@
         //                                           ╰─────────────┴─────────────╯                 ╰─────────────┴─────────────╯
             >;
         };
-
-        extra_layer { status = "reserved"; };
     };
 
     conditional_layers {
