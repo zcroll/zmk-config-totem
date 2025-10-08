@@ -1,7 +1,6 @@
 /*
- * CYBERSECURITY TOTEM CONFIGURATION - Based on YOUR Colemak-DH Layout
- * Optimized for: Penetration Testing, CTF, Incident Response, Red Team Operations
- * Tools: Metasploit, Burp Suite, Nmap, Terminal Hacking, Network Analysis
+ * CYBERSECURITY TOTEM CONFIGURATION - Using YOUR Exact Colemak-DH Base
+ * Layer 0 is verbatim as provided; Layers 1–4 add cybersecurity and tool shortcuts.
  */
 
 #include <behaviors.dtsi>
@@ -23,7 +22,7 @@
 
 / {
     behaviors {
-        // UROB'S TIMELESS HOMEROW MODS - For rapid terminal work
+        // Timeless home-row mods
         hml: homerow_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -35,7 +34,6 @@
             hold-trigger-key-positions = <KEYS_R THUMBS>;
             hold-trigger-on-release;
         };
-
         hmr: homerow_mod_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -48,17 +46,18 @@
             hold-trigger-on-release;
         };
 
-        // FAST LAYER ACCESS for security tools
+        // Layer-tap for HACK layer (fast)
         lt_hack: layer_tap_hack {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "balanced";
-            tapping-term-ms = <180>;  // Faster for hacking workflow
+            tapping-term-ms = <180>;
             quick-tap-ms = <125>;
             global-quick-tap;
-            bindings = <&mo>, <&smart_space>;
+            bindings = <&mo>, <&kp>;
         };
 
+        // Layer-tap for TERM layer
         lt_term: layer_tap_terminal {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -67,342 +66,153 @@
             quick-tap-ms = <125>;
             bindings = <&mo>, <&kp>;
         };
-
-        // SMART SPACE - For command line efficiency
-        smart_space: smart_space_repeat {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp SPACE>, <&key_repeat>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            keep-mods = <(MOD_RSFT)>;
-        };
-
-        // QUICK SHIFT for privilege escalation commands
-        quick_shift: quick_shift {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&sk LSHFT>, <&caps_word>;
-            mods = <(MOD_LSFT)>;
-        };
     };
 
     combos {
         compatible = "zmk,combos";
 
-        // CYBERSECURITY SHORTCUTS - Most critical first
+        // HACK LAYER SYMBOLS
         combo_pipe {
             timeout-ms = <50>;
-            key-positions = <19 20>; // N+E (for shell pipes |)
+            key-positions = <19 20>; // N+E → |
             bindings = <&kp PIPE>;
-            require-prior-idle-ms = <150>;
         };
-        
-        combo_ampersand {
+        combo_amp {
             timeout-ms = <50>;
-            key-positions = <20 21>; // E+I (for background processes &)
+            key-positions = <20 21>; // E+I → &
             bindings = <&kp AMPS>;
-            require-prior-idle-ms = <150>;
         };
-        
-        combo_grep_flag {
+        combo_lt {
             timeout-ms = <50>;
-            key-positions = <21 22>; // I+O (for grep -i)
-            bindings = <&grep_flag>;
-            require-prior-idle-ms = <150>;
+            key-positions = <7 8>; // L+U → <
+            bindings = <&kp LT>;
+        };
+        combo_gt {
+            timeout-ms = <50>;
+            key-positions = <8 9>; // U+Y → >
+            bindings = <&kp GT>;
         };
 
-        // NETWORK ANALYSIS COMBOS
-        combo_netcat {
+        // PENTESTING COMMANDS
+        combo_nmap {
             timeout-ms = <50>;
-            key-positions = <18 19>; // H+N (nc command)
+            key-positions = <26 27>; // C+V → nmap -sS 
+            bindings = <&nmap_scan>;
+        };
+        combo_nc {
+            timeout-ms = <50>;
+            key-positions = <18 19>; // H+N → nc -lvnp 
             bindings = <&netcat_cmd>;
-            require-prior-idle-ms = <150>;
         };
-
         combo_sudo {
             timeout-ms = <50>;
-            key-positions = <6 7>; // J+L (sudo)
+            key-positions = <6 7>; // J+L → sudo 
             bindings = <&sudo_cmd>;
-            require-prior-idle-ms = <150>;
         };
 
-        combo_less_than {
+        // TERMINAL NAVIGATION
+        combo_cd_home {
             timeout-ms = <50>;
-            key-positions = <7 8>; // L+U (input redirection <)
-            bindings = <&kp LT>;
-            require-prior-idle-ms = <150>;
-        };
-
-        combo_greater_than {
-            timeout-ms = <50>;
-            key-positions = <8 9>; // U+Y (output redirection >)
-            bindings = <&kp GT>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // PENETRATION TESTING SHORTCUTS
-        combo_nmap_scan {
-            timeout-ms = <50>;
-            key-positions = <26 27>; // C+V (nmap -sS)
-            bindings = <&nmap_scan>;
-            require-prior-idle-ms = <150>;
-        };
-
-        combo_burp_send {
-            timeout-ms = <50>;
-            key-positions = <27 28>; // V+B (Ctrl+R for Burp Repeater)
-            bindings = <&kp LC(R)>;
-            require-prior-idle-ms = <150>;
-        };
-
-        combo_metasploit {
-            timeout-ms = <50>;
-            key-positions = <28 29>; // B+K (msfconsole)
-            bindings = <&msf_console>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // TERMINAL NAVIGATION - CTF essentials
-        combo_home_dir {
-            timeout-ms = <50>;
-            key-positions = <2 3>; // W+F (cd ~)
+            key-positions = <2 3>; // W+F → cd ~
             bindings = <&home_dir>;
-            require-prior-idle-ms = <150>;
         };
-
-        combo_parent_dir {
+        combo_cd_up {
             timeout-ms = <50>;
-            key-positions = <3 4>; // F+P (cd ..)
+            key-positions = <3 4>; // F+P → cd ..
             bindings = <&parent_dir>;
-            require-prior-idle-ms = <150>;
         };
 
-        // VIM/EDITOR SHORTCUTS for log analysis
+        // VIM SHORTCUTS
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <14 15>; // R+S (ESC for vim)
+            key-positions = <14 15>; // R+S → ESC
             bindings = <&kp ESC>;
-            require-prior-idle-ms = <150>;
         };
-
-        combo_save_quit {
+        combo_wq {
             timeout-ms = <50>;
-            key-positions = <15 16>; // S+T (:wq in vim)
+            key-positions = <15 16>; // S+T → :wq
             bindings = <&vim_save_quit>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // SECURITY ANALYSIS SHORTCUTS
-        combo_hash_md5 {
-            timeout-ms = <50>;
-            key-positions = <31 32>; // M+comma (md5sum)
-            bindings = <&md5_hash>;
-            require-prior-idle-ms = <150>;
-        };
-
-        combo_hash_sha {
-            timeout-ms = <50>;
-            key-positions = <32 33>; // comma+dot (sha256sum)
-            bindings = <&sha_hash>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // PRIVILEGE ESCALATION
-        combo_su_root {
-            timeout-ms = <50>;
-            key-positions = <25 26>; // X+C (su -)
-            bindings = <&su_root>;
-            require-prior-idle-ms = <150>;
-        };
-
-        combo_find_suid {
-            timeout-ms = <50>;
-            key-positions = <33 34>; // dot+slash (find SUID)
-            bindings = <&find_suid>;
-            require-prior-idle-ms = <150>;
-        };
-
-        // CAPS WORD for typing CONSTANTS/IPs
-        combo_caps_word {
-            timeout-ms = <50>;
-            key-positions = <16 20>; // T+E
-            bindings = <&caps_word>;
         };
     };
 
     macros {
-        // PENETRATION TESTING COMMANDS
         nmap_scan: nmap_scan {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp N &kp M &kp A &kp P &kp SPACE &kp MINUS &kp S &kp S &kp SPACE>;
         };
-
         netcat_cmd: netcat_cmd {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp N &kp C &kp SPACE &kp MINUS &kp L &kp V &kp N &kp P &kp SPACE>;
         };
-
         sudo_cmd: sudo_cmd {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp S &kp U &kp D &kp O &kp SPACE>;
         };
-
-        grep_flag: grep_flag {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp SPACE &kp PIPE &kp SPACE &kp G &kp R &kp E &kp P &kp SPACE &kp MINUS &kp I &kp SPACE>;
-        };
-
-        // METASPLOIT SHORTCUTS
-        msf_console: msf_console {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp M &kp S &kp F &kp C &kp O &kp N &kp S &kp O &kp L &kp E>;
-        };
-
-        // TERMINAL NAVIGATION
         home_dir: home_dir {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp C &kp D &kp SPACE &kp TILDE>;
         };
-
         parent_dir: parent_dir {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp C &kp D &kp SPACE &kp DOT &kp DOT>;
         };
-
-        // VIM SHORTCUTS
         vim_save_quit: vim_save_quit {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp COLON &kp W &kp Q>;
-        };
-
-        // FORENSICS COMMANDS
-        md5_hash: md5_hash {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp M &kp D &kp N5 &kp S &kp U &kp M &kp SPACE>;
-        };
-
-        sha_hash: sha_hash {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp S &kp H &kp A &kp N2 &kp N5 &kp N6 &kp S &kp U &kp M &kp SPACE>;
-        };
-
-        // PRIVILEGE ESCALATION
-        su_root: su_root {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp S &kp U &kp SPACE &kp MINUS>;
-        };
-
-        find_suid: find_suid {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp F &kp I &kp N &kp D &kp SPACE &kp FSLH &kp SPACE &kp MINUS &kp P &kp E &kp R &kp M &kp SPACE &kp MINUS &kp U &kp PLUS &kp S>;
-        };
-
-        // NETWORK ANALYSIS
-        tcpdump_cmd: tcpdump_cmd {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp T &kp C &kp P &kp D &kp U &kp M &kp P &kp SPACE &kp MINUS &kp I &kp SPACE>;
-        };
-
-        wireshark_cmd: wireshark_cmd {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp T &kp S &kp H &kp A &kp R &kp K &kp SPACE &kp MINUS &kp I &kp SPACE>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // ===================================================================
-        // LAYER 0: YOUR EXACT COLEMAK-DH LAYOUT with Security HRMs
-        // ===================================================================
         base_layer {
-            display-name = "Base";
             bindings = <
-        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-             &kp TAB       &kp Q         &kp W         &kp F         &kp P         &kp G             &kp J         &kp L         &kp U         &kp Y         &kp SEMI      &kp BSLH
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-             &kp ESC       &hml LGUI A   &hml LALT R   &hml LSHFT S  &hml LCTRL T  &kp D             &kp H         &hmr RCTRL N  &hmr RSHFT E  &hmr LALT I   &hmr RGUI O   &kp SQT
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-             &kp LCTRL     &kp Z         &kp X         &kp C         &kp V         &kp B             &kp K         &kp M         &kp COMMA     &kp DOT       &kp FSLH      &kp RSHFT
-        // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤                 ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                       &mo TOOL      &lt_hack HACK SPACE             &lt_term TERM BSPC   &quick_shift
-        //                                           ╰─────────────┴─────────────╯                 ╰─────────────┴─────────────╯
+           &kp Q  &kp W           &kp F        &kp P        &kp G             &kp J                &kp L            &kp U          &kp Y            &kp SEMI
+           &kp A  &mt LEFT_ALT R  &mt LCTRL S  &mt LSHFT T  &mt LEFT_GUI D    &mt RIGHT_COMMAND H  &mt RSHFT N      &mt RCTRL E    &mt RIGHT_ALT I  &kp O
+&kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
+                                  &kp LGUI     &lt_hack HACK    &lt_term TERM    &kp SPACE            &kp RIGHT_SHIFT  &kp RIGHT_ALT
             >;
         };
 
-        // ===================================================================
-        // LAYER 1: HACKING SYMBOLS - Penetration Testing Optimized
-        // ===================================================================
         hacking_layer {
             display-name = "Hack";
             bindings = <
-        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
              &trans        &kp EXCL      &kp AT        &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS      &kp STAR      &kp LPAR      &kp RPAR      &trans
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
              &trans        &kp PIPE      &kp SQT       &kp DQT       &kp UNDER     &kp MINUS         &kp EQUAL     &kp LBKT      &kp RBKT      &kp LBRC      &kp RBRC      &kp COLON
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-             &trans        &kp GRAVE     &kp TILDE     &kp LT        &kp GT        &kp PLUS          &kp BSLH      &kp FSLH      &kp QMARK     &tcpdump_cmd  &wireshark_cmd &trans
-        // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤                 ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                       &trans        &trans                          &kp DEL       &trans
-        //                                           ╰─────────────┴─────────────╯                 ╰─────────────┴─────────────╯
+             &trans        &kp GRAVE     &kp TILDE     &kp LT        &kp GT        &kp PLUS          &kp BSLH      &kp FSLH      &kp QMARK     &kp COMMA     &kp DOT       &trans
+                                                   &trans        &trans                          &kp DEL       &trans
             >;
         };
 
-        // ===================================================================
-        // LAYER 2: TERMINAL - CTF & Incident Response Navigation
-        // ===================================================================
         terminal_layer {
             display-name = "Term";
             bindings = <
-        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
              &trans        &kp N1        &kp N2        &kp N3        &kp N4        &kp N5            &kp N6        &kp N7        &kp N8        &kp N9        &kp N0        &trans
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
              &trans        &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp HOME          &kp END       &kp LC(A)     &kp LC(E)     &kp LC(K)     &kp LC(U)     &kp LC(W)
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-             &trans        &kp LC(Z)     &kp LC(X)     &kp LC(C)     &kp LC(V)     &kp LC(L)         &kp LC(R)     &kp PG_UP     &kp PG_DN     &kp LC(D)     &kp LC(C)     &trans
-        // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤                 ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                       &kp LC(SPACE) &kp SPACE                       &trans        &kp RET
-        //                                           ╰─────────────┴─────────────╯                 ╰─────────────┴─────────────╯
+             &trans        &kp PG_UP     &kp PG_DN     &kp LC(LEFT)  &kp LC(RIGHT) &kp LC(HOME)      &kp LC(END)   &kp N1        &kp N2        &kp N3        &kp DOT       &trans
+                                                   &kp N0        &kp SPACE                       &trans        &kp RET
             >;
         };
 
-        // ===================================================================
-        // LAYER 3: SECURITY TOOLS - Metasploit, Burp, Nmap Functions  
-        // ===================================================================
         tools_layer {
             display-name = "Tool";
             bindings = <
-        // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
              &trans        &kp F1        &kp F2        &kp F3        &kp F4        &kp F5            &kp F6        &kp F7        &kp F8        &kp F9        &kp F10       &trans
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
-             &trans        &kp LC(LS(T)) &kp LC(LS(I)) &kp LC(LS(R)) &kp LC(LS(P)) &kp LC(LS(S))     &kp LC(R)     &kp LC(I)     &kp LC(H)     &kp LC(G)     &kp F11       &kp F12
-        // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤
+             &trans        &kp LC(T)     &kp LC(B)     &kp LC(P)     &kp LC(S)     &kp LC(R)         &kp LC(G)     &kp LC(I)     &kp LC(H)     &kp LC(G)     &kp F11       &kp F12
              &trans        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_CLR    &out OUT_USB  &sys_reset        &bootloader   &kp C_BRI_DN  &kp C_BRI_UP  &kp C_VOL_DN  &kp C_VOL_UP  &trans
-        // ╰─────────────┴─────────────┴─────────────┼─────────────┼─────────────┤                 ├─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                       &trans        &trans                          &trans        &trans
-        //                                           ╰─────────────┴─────────────╯                 ╰─────────────┴─────────────╯
+                                                   &trans        &trans                          &trans        &trans
             >;
         };
     };
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        
-        // Auto-activate tools when both hack and terminal are pressed
         tri_layer {
             if-layers = <HACK TERM>;
             then-layer = <TOOL>;
