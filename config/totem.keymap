@@ -239,14 +239,14 @@
         compatible = "zmk,keymap";
 
         // ============================================================
-        // LAYER 0: BASE - Your exact Colemak-DH layout
+        // LAYER 0: BASE - Your Colemak-DH with BSPC/DEL on thumbs
         // ============================================================
         base_layer {
             bindings = <
            &kp Q  &kp W           &kp F        &kp P        &kp G             &kp J                &kp L            &kp U          &kp Y            &kp SEMI
            &kp A  &mt LEFT_ALT R  &mt LCTRL S  &mt LSHFT T  &mt LEFT_GUI D    &mt RIGHT_COMMAND H  &mt RSHFT N      &mt RCTRL E    &mt RIGHT_ALT I  &kp O
 &kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
-                                  &kp LGUI     &mo TERM     &mo HACK          &kp SPACE            &kp RIGHT_SHIFT  &kp RIGHT_ALT
+                                  &kp LGUI     &mo TERM     &mo HACK          &kp SPACE            &kp BSPC         &kp DEL
             >;
         };
 
@@ -257,7 +257,7 @@
             bindings = <
            &kp EXCL  &kp AT     &kp HASH   &kp DLLR   &kp PRCNT         &kp CARET  &kp AMPS   &kp STAR   &kp LPAR   &kp RPAR
            &kp PIPE  &kp SQT    &kp DQT    &kp UNDER  &kp MINUS         &kp EQUAL  &kp LBKT   &kp RBKT   &kp LBRC   &kp RBRC
-&trans     &kp GRAVE &kp TILDE  &kp LT     &kp GT     &kp PLUS          &kp BSLH   &kp FSLH   &kp QMARK  &kp COLON  &kp SEMI  &kp DEL
+&trans     &kp GRAVE &kp TILDE  &kp LT     &kp GT     &kp PLUS          &kp BSLH   &kp FSLH   &kp QMARK  &kp COLON  &kp SEMI  &trans
                                 &trans     &trans                       &kp RET    &trans
             >;
         };
@@ -270,7 +270,7 @@
            &kp N1      &kp N2      &kp N3        &kp N4        &kp N5            &kp N6        &kp N7      &kp N8      &kp N9      &kp N0
            &kp LEFT    &kp DOWN    &kp UP        &kp RIGHT     &kp HOME          &kp END       &kp LC(A)   &kp LC(E)   &kp LC(K)   &kp LC(U)
 &trans     &kp PG_UP   &kp PG_DN   &kp LC(LEFT)  &kp LC(RIGHT) &kp LC(HOME)      &kp LC(END)   &kp LC(W)   &kp LC(D)   &kp LC(C)   &kp LC(R)  &kp LC(L)
-                                   &kp N0        &trans                          &kp BSPC      &kp RET
+                                   &kp N0        &trans                          &kp RET       &trans
             >;
         };
 
