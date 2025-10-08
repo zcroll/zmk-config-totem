@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MIT
  * 
  * TOTEM 38-KEY - Based on urob's timeless approach
- * Your exact Colemak-DH + urob's best practices
+ * Your exact Colemak-DH + urob's best practices + ENTER on base
  */
 
 #include <behaviors.dtsi>
@@ -22,7 +22,7 @@
 
 / {
     behaviors {
-        // UROB'S TIMELESS HOMEROW MODS - Exact settings
+        // UROB'S TIMELESS HOMEROW MODS
         hml: homerow_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -55,7 +55,7 @@
             mods = <(MOD_LSFT)>;
         };
 
-        // Smart layer-taps for thumbs
+        // Layer-tap for navigation
         lt_nav: lt_nav {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -65,7 +65,7 @@
             bindings = <&mo>, <&kp>;
         };
 
-        // Multi-purpose navigation (urob's arrow cluster concept)
+        // Multi-purpose navigation (urob's arrow cluster)
         smart_nav: smart_nav {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -79,89 +79,88 @@
         compatible = "zmk,combos";
 
         // UROB'S VERTICAL COMBOS - Number row pattern
-        // Top row vertical combos
         combo_excl {
             timeout-ms = <50>;
-            key-positions = <1 13>; // W+X (vertical)
+            key-positions = <1 13>; // W+X
             bindings = <&kp EXCL>;
             require-prior-idle-ms = <150>;
         };
         combo_at {
             timeout-ms = <50>;
-            key-positions = <2 14>; // F+R (vertical)
+            key-positions = <2 14>; // F+R
             bindings = <&kp AT>;
             require-prior-idle-ms = <150>;
         };
         combo_hash {
             timeout-ms = <50>;
-            key-positions = <3 15>; // P+S (vertical)
+            key-positions = <3 15>; // P+S
             bindings = <&kp HASH>;
             require-prior-idle-ms = <150>;
         };
         combo_dllr {
             timeout-ms = <50>;
-            key-positions = <4 16>; // G+T (vertical)
+            key-positions = <4 16>; // G+T
             bindings = <&kp DLLR>;
             require-prior-idle-ms = <150>;
         };
         combo_prcnt {
             timeout-ms = <50>;
-            key-positions = <5 17>; // B+D (vertical)
+            key-positions = <5 17>; // B+D
             bindings = <&kp PRCNT>;
             require-prior-idle-ms = <150>;
         };
         combo_caret {
             timeout-ms = <50>;
-            key-positions = <6 18>; // J+H (vertical)
+            key-positions = <6 18>; // J+H
             bindings = <&kp CARET>;
             require-prior-idle-ms = <150>;
         };
         combo_amps {
             timeout-ms = <50>;
-            key-positions = <7 19>; // L+N (vertical)
+            key-positions = <7 19>; // L+N
             bindings = <&kp AMPS>;
             require-prior-idle-ms = <150>;
         };
         combo_star {
             timeout-ms = <50>;
-            key-positions = <8 20>; // U+E (vertical)
+            key-positions = <8 20>; // U+E
             bindings = <&kp STAR>;
             require-prior-idle-ms = <150>;
         };
 
-        // Bottom row vertical combos (symmetric to top)
+        // Bottom row vertical combos (symmetric)
         combo_under {
             timeout-ms = <50>;
-            key-positions = <13 25>; // X+Z (vertical)
+            key-positions = <13 25>; // R+Z
             bindings = <&kp UNDER>;
             require-prior-idle-ms = <150>;
         };
         combo_minus {
             timeout-ms = <50>;
-            key-positions = <14 26>; // R+A (vertical)
+            key-positions = <14 26>; // A+X
             bindings = <&kp MINUS>;
             require-prior-idle-ms = <150>;
         };
         combo_plus {
             timeout-ms = <50>;
-            key-positions = <15 27>; // S+C (vertical)
+            key-positions = <15 27>; // S+C
             bindings = <&kp PLUS>;
             require-prior-idle-ms = <150>;
         };
         combo_equal {
             timeout-ms = <50>;
-            key-positions = <16 28>; // T+V (vertical)
+            key-positions = <16 28>; // T+V
             bindings = <&kp EQUAL>;
             require-prior-idle-ms = <150>;
         };
         combo_pipe {
             timeout-ms = <50>;
-            key-positions = <19 31>; // N+M (vertical)
+            key-positions = <19 31>; // N+M
             bindings = <&kp PIPE>;
             require-prior-idle-ms = <150>;
         };
 
-        // UROB'S HORIZONTAL COMBOS - Brackets (symmetric)
+        // UROB'S HORIZONTAL COMBOS - Brackets
         combo_lpar {
             timeout-ms = <50>;
             key-positions = <8 9>; // U+Y
@@ -199,17 +198,11 @@
             require-prior-idle-ms = <150>;
         };
 
-        // Essential combos
+        // Essential keys
         combo_esc {
             timeout-ms = <50>;
             key-positions = <14 15>; // R+S
             bindings = <&kp ESC>;
-            require-prior-idle-ms = <150>;
-        };
-        combo_ret {
-            timeout-ms = <50>;
-            key-positions = <19 20>; // N+E
-            bindings = <&kp RET>;
             require-prior-idle-ms = <150>;
         };
         combo_tab {
@@ -219,7 +212,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // Urob's left-hand mouse combos (adapted)
+        // Clipboard (urob's left-hand)
         combo_copy {
             timeout-ms = <50>;
             key-positions = <27 28>; // C+V
@@ -239,7 +232,7 @@
             require-prior-idle-ms = <150>;
         };
 
-        // Additional useful combos
+        // Additional useful
         combo_colon {
             timeout-ms = <50>;
             key-positions = <7 8>; // L+U
@@ -252,13 +245,25 @@
             bindings = <&kp SEMI>;
             require-prior-idle-ms = <150>;
         };
+        combo_grave {
+            timeout-ms = <50>;
+            key-positions = <1 2>; // Q+W
+            bindings = <&kp GRAVE>;
+            require-prior-idle-ms = <150>;
+        };
+        combo_tilde {
+            timeout-ms = <50>;
+            key-positions = <0 1>; // Q+W (shifted)
+            bindings = <&kp TILDE>;
+            require-prior-idle-ms = <150>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
         // ==================================================================
-        // BASE LAYER - Your exact Colemak-DH (unchanged)
+        // BASE LAYER - Your exact Colemak-DH with ENTER on thumb
         // ==================================================================
         base_layer {
             label = "BASE";
@@ -266,13 +271,12 @@
            &kp Q  &kp W           &kp F        &kp P        &kp G             &kp J                &kp L            &kp U          &kp Y            &kp SEMI
            &kp A  &hml LEFT_ALT R &hml LCTRL S &hml LSHFT T &hml LEFT_GUI D   &hmr RIGHT_COMMAND H &hmr RSHFT N     &hmr RCTRL E   &hmr RIGHT_ALT I &kp O
 &kp LCTRL  &kp Z  &kp X           &kp C        &kp V        &kp B             &kp K                &kp M            &kp COMMA      &kp DOT          &kp FSLH  &kp APOS
-                                  &kp LGUI     &lt_nav NAV BSPC  &mo NUM       &kp SPACE            &magic_shift     &kp RALT
+                                  &kp LGUI     &lt_nav NAV BSPC  &mo NUM       &kp SPACE            &magic_shift     &kp RET
             >;
         };
 
         // ==================================================================
-        // NAV LAYER - Urob's navigation concept (arrows on home row)
-        // Multi-purpose: tap for arrow, hold for home/end/doc navigation
+        // NAV LAYER - Urob's smart navigation (arrows with hold functions)
         // ==================================================================
         nav_layer {
             label = "NAV";
@@ -285,7 +289,7 @@
         };
 
         // ==================================================================
-        // NUM LAYER - Numbers + F-keys (urob's numword concept adapted)
+        // NUM LAYER - Numbers + F-keys
         // ==================================================================
         num_layer {
             label = "NUM";
@@ -298,7 +302,7 @@
         };
 
         // ==================================================================
-        // FUN LAYER - System controls (activated via conditional layer)
+        // FUN LAYER - System controls (conditional layer)
         // ==================================================================
         fun_layer {
             label = "FUN";
@@ -314,7 +318,6 @@
     conditional_layers {
         compatible = "zmk,conditional-layers";
 
-        // Urob's tri-layer concept
         tri_layer {
             if-layers = <NAV NUM>;
             then-layer = <FUN>;
