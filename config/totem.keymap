@@ -1,6 +1,6 @@
 /*
- * TOTEM 38-KEY COMPLETE LAYOUT
- * All keys functional with urob's advanced features
+ * TOTEM 38-KEY COMPLETE LAYOUT - FIXED
+ * Proper 38-key count with all keys mapped
  */
 
 #include <behaviors.dtsi>
@@ -18,13 +18,9 @@
 // Complete Totem 38-key positions
 #define KEYS_L 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24    // Left 15 keys
 #define KEYS_R 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29    // Right 15 keys
-#define THUMBS 30 31 32 33 34 35                           // All 6 thumbs
+#define THUMBS 30 31 32 33 34 35 36 37                     // All 8 thumb positions for 38-key
 
 #define QUICK_TAP_MS 175
-#define COMBO_TERM_FAST 18
-#define COMBO_TERM_SLOW 30
-#define COMBO_IDLE_FAST 150
-#define COMBO_IDLE_SLOW 50
 
 / {
     behaviors {
@@ -142,16 +138,6 @@
             bindings = <&kp QMARK>, <&kp EXCL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-
-        // Smart delete with word deletion
-        bs_del: backspace_delete {
-            compatible = "zmk,behavior-mod-morph";
-            label = "BACKSPACE_DELETE";
-            #binding-cells = <0>;
-            bindings = <&kp BSPC>, <&kp DEL>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
-            keep-mods = <MOD_RSFT>;
-        };
     };
 
     macros {
@@ -169,230 +155,91 @@
     combos {
         compatible = "zmk,combos";
 
-        // Horizontal combos - left hand
+        // Essential combos
         combo_esc {
-            key-positions = <2 3>;     // F P
+            key-positions = <2 3>;
             bindings = <&kp ESC>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_tab {
-            key-positions = <12 13>;   // S T
+            key-positions = <12 13>;
             bindings = <&kp TAB>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
-        combo_cut {
-            key-positions = <21 23>;   // X V
-            bindings = <&kp LC(X)>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
-        };
-
-        combo_copy {
-            key-positions = <21 22>;   // X C
-            bindings = <&kp LC(C)>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
-        };
-
-        combo_paste {
-            key-positions = <22 23>;   // C V
-            bindings = <&kp LC(V)>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
-        };
-
-        // Horizontal combos - right hand
-        combo_bspc {
-            key-positions = <6 7>;     // L U
-            bindings = <&kp BSPC>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
-        };
-
-        combo_del {
-            key-positions = <7 8>;     // U Y
-            bindings = <&kp DEL>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
-        };
-
+        // Brackets
         combo_lpar {
-            key-positions = <16 17>;   // N E
+            key-positions = <16 17>;
             bindings = <&kp LPAR>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_rpar {
-            key-positions = <17 18>;   // E I
+            key-positions = <17 18>;
             bindings = <&kp RPAR>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_lbkt {
-            key-positions = <26 27>;   // M ,
+            key-positions = <26 27>;
             bindings = <&kp LBKT>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_rbkt {
-            key-positions = <27 28>;   // , .
+            key-positions = <27 28>;
             bindings = <&kp RBKT>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_lbrc {
-            key-positions = <25 26>;   // K M
+            key-positions = <25 26>;
             bindings = <&kp LBRC>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
         combo_rbrc {
-            key-positions = <28 29>;   // . ?
+            key-positions = <28 29>;
             bindings = <&kp RBRC>;
-            timeout-ms = <COMBO_TERM_FAST>;
-            require-prior-idle-ms = <COMBO_IDLE_FAST>;
+            timeout-ms = <50>;
         };
 
-        // Vertical combos - symbols (top row)
-        combo_at {
-            key-positions = <1 11>;    // W R
-            bindings = <&kp AT>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
+        // Clipboard
+        combo_copy {
+            key-positions = <21 22>;
+            bindings = <&kp LC(C)>;
+            timeout-ms = <50>;
         };
 
-        combo_hash {
-            key-positions = <2 12>;    // F S
-            bindings = <&kp HASH>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
+        combo_paste {
+            key-positions = <22 23>;
+            bindings = <&kp LC(V)>;
+            timeout-ms = <50>;
         };
 
-        combo_dllr {
-            key-positions = <3 13>;    // P T
-            bindings = <&kp DLLR>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_prcnt {
-            key-positions = <4 14>;    // G D
-            bindings = <&kp PRCNT>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_caret {
-            key-positions = <5 15>;    // J H
-            bindings = <&kp CARET>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_amps {
-            key-positions = <6 16>;    // L N
-            bindings = <&kp AMPS>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_star {
-            key-positions = <7 17>;    // U E
-            bindings = <&kp STAR>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_plus {
-            key-positions = <8 18>;    // Y I
-            bindings = <&kp PLUS>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        // Vertical combos - symbols (bottom row)
-        combo_grave {
-            key-positions = <11 21>;   // R X
-            bindings = <&kp GRAVE>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_bslh {
-            key-positions = <12 22>;   // S C
-            bindings = <&kp BSLH>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_equal {
-            key-positions = <13 23>;   // T V
-            bindings = <&kp EQUAL>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_tilde {
-            key-positions = <14 24>;   // D B
-            bindings = <&kp TILDE>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_under {
-            key-positions = <15 25>;   // H K
-            bindings = <&kp UNDER>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_minus {
-            key-positions = <16 26>;   // N M
-            bindings = <&kp MINUS>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_fslh {
-            key-positions = <17 27>;   // E ,
-            bindings = <&kp FSLH>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
-        };
-
-        combo_pipe {
-            key-positions = <18 28>;   // I .
-            bindings = <&kp PIPE>;
-            timeout-ms = <COMBO_TERM_SLOW>;
-            require-prior-idle-ms = <COMBO_IDLE_SLOW>;
+        combo_cut {
+            key-positions = <21 23>;
+            bindings = <&kp LC(X)>;
+            timeout-ms = <50>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // BASE LAYER
+        // BASE LAYER - All 38 keys properly mapped
         base_layer {
             label = "BASE";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &kp Q &kp W &kp F &kp P &kp G     &kp J &kp L &kp U &kp Y &kp SQT
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &kp A &hml LALT R &hml LCTRL S &hml LSHFT T &hml LGUI D   &hmr LGUI H &hmr RSHFT N &hmr RCTRL E &hmr LALT I &kp O
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &kp Z &kp X &kp C &kp V &kp B     &kp K &kp M &comma_morph &dot_morph &qexcl
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &mo NAV &bs_del &mo FN   &lt_spc NUM 0 &mo SYM &magic_shift LSHFT 0
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+        // Row 1: 10 keys (0-9)
+             &kp Q         &kp W            &kp F         &kp P         &kp G              &kp J                 &kp L         &kp U         &kp Y             &kp SQT
+        // Row 2: 10 keys (10-19)
+             &kp A         &hml LALT R      &hml LCTRL S  &hml LSHFT T  &hml LGUI D        &hmr LGUI H           &hmr RSHFT N  &hmr RCTRL E  &hmr LALT I       &kp O
+        // Row 3: 10 keys (20-29)
+             &kp Z         &kp X            &kp C         &kp V         &kp B              &kp K                 &kp M         &comma_morph  &dot_morph        &qexcl
+        // Thumbs: 8 keys (30-37) for 38-key total
+                                            &mo NAV       &kp BSPC      &mo FN             &mo SYM               &lt_spc NUM 0 &magic_shift LSHFT 0 &kp DEL &kp RET
             >;
         };
 
@@ -400,15 +247,10 @@
         nav_layer {
             label = "NAV";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &kp LA(F4) &trans &kp LS(TAB) &kp TAB &trans   &kp PG_UP &kp HOME &kp UP &kp END &kp INS
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &sk LGUI &sk LALT &sk LSHFT &sk LCTRL &trans   &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &kp RET
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &trans &trans &trans &trans &trans   &kp CAPS &kp LC(LEFT) &kp LC(DOWN) &kp LC(RIGHT) &kp DEL
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &trans &trans &trans   &trans &trans &kp K_CANCEL
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+             &kp LA(F4)    &trans           &kp LS(TAB)   &kp TAB       &trans             &kp PG_UP             &kp HOME      &kp UP        &kp END           &kp INS
+             &sk LGUI      &sk LALT         &sk LSHFT     &sk LCTRL     &trans             &kp PG_DN             &kp LEFT      &kp DOWN      &kp RIGHT         &kp RET
+             &trans        &trans           &trans        &trans        &trans             &kp CAPS              &kp LC(LEFT)  &kp LC(DOWN)  &kp LC(RIGHT)     &kp DEL
+                                            &trans        &trans        &trans             &trans                &trans        &kp K_CANCEL  &trans            &trans
             >;
         };
 
@@ -416,15 +258,10 @@
         num_layer {
             label = "NUM";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &trans &kp N7 &kp N8 &kp N9 &trans   &trans &trans &trans &trans &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &hml LGUI N0 &hml LALT N4 &hml LCTRL N5 &hml LSHFT N6 &trans   &trans &trans &trans &trans &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &trans &kp N1 &kp N2 &kp N3 &trans   &trans &trans &trans &trans &trans
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &trans &trans &trans   &trans &trans &trans
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+             &trans        &kp N7           &kp N8        &kp N9        &trans             &trans                &trans        &trans        &trans            &trans
+             &hml LGUI N0  &hml LALT N4     &hml LCTRL N5 &hml LSHFT N6 &trans             &trans                &trans        &trans        &trans            &trans
+             &trans        &kp N1           &kp N2        &kp N3        &trans             &trans                &trans        &trans        &trans            &trans
+                                            &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
             >;
         };
 
@@ -432,15 +269,10 @@
         sym_layer {
             label = "SYM";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &kp GRAVE &kp MINUS &kp PLUS &kp EQUAL &kp COLON   &kp PIPE &kp LBRC &kp RBRC &kp LBKT &kp RBKT
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &kp TILDE &kp UNDER &kp BSLH &kp FSLH &kp SEMI   &kp LT &kp GT &kp SQT &kp DQT &kp QMARK
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &trans &trans &trans   &trans &trans &trans
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+             &kp EXCL      &kp AT           &kp HASH      &kp DLLR      &kp PRCNT          &kp CARET             &kp AMPS      &kp STAR      &kp LPAR          &kp RPAR
+             &kp GRAVE     &kp MINUS        &kp PLUS      &kp EQUAL     &kp COLON          &kp PIPE              &kp LBRC      &kp RBRC      &kp LBKT          &kp RBKT
+             &kp TILDE     &kp UNDER        &kp BSLH      &kp FSLH      &kp SEMI           &kp LT                &kp GT        &kp SQT       &kp DQT           &kp QMARK
+                                            &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
             >;
         };
 
@@ -448,15 +280,10 @@
         fn_layer {
             label = "FN";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &kp F12 &kp F7 &kp F8 &kp F9 &trans   &trans &kp C_PREV &kp C_VOL_UP &kp C_NEXT &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &hml LGUI F11 &hml LALT F4 &hml LCTRL F5 &hml LSHFT F6 &trans   &trans &trans &kp C_VOL_DN &trans &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &kp F10 &kp F1 &kp F2 &kp F3 &trans   &trans &trans &trans &trans &trans
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &trans &trans &trans   &kp C_MUTE &kp C_PP &trans
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+             &kp F12       &kp F7           &kp F8        &kp F9        &trans             &trans                &kp C_PREV    &kp C_VOL_UP  &kp C_NEXT        &trans
+             &hml LGUI F11 &hml LALT F4     &hml LCTRL F5 &hml LSHFT F6 &trans             &trans                &trans        &kp C_VOL_DN  &trans            &trans
+             &kp F10       &kp F1           &kp F2        &kp F3        &trans             &trans                &trans        &trans        &trans            &trans
+                                            &trans        &trans        &trans             &trans                &kp C_MUTE    &kp C_PP      &trans            &trans
             >;
         };
 
@@ -464,15 +291,10 @@
         sys_layer {
             label = "SYS";
             bindings = <
-        // ┌─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┐
-             &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR   &trans &trans &trans &trans &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &out OUT_USB &out OUT_BLE &trans &trans &trans   &trans &trans &trans &trans &trans
-        // ├─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┤
-             &trans &trans &trans &bootloader &sys_reset   &sys_reset &bootloader &trans &trans &trans
-        // └─────┴─────┴─────┼─────┼─────┼─────┼─────┼─────┼─────┴─────┴─────┘
-                           &trans &trans &trans   &trans &trans &trans
-        //                 └─────┴─────┴─────┴─────┴─────┴─────┘
+             &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR         &trans                &trans        &trans        &trans            &trans
+             &out OUT_USB  &out OUT_BLE     &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
+             &trans        &trans           &trans        &bootloader   &sys_reset         &sys_reset            &bootloader   &trans        &trans            &trans
+                                            &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
             >;
         };
     };
