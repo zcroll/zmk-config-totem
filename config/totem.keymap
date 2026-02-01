@@ -1,6 +1,7 @@
 /*
- * TOTEM 38-KEY LAYOUT - BUILD FIXED
- * Exactly 38 keys per layer for successful compilation
+ * TOTEM 38-KEY LAYOUT - LARAVEL OPTIMIZED
+ * Enhanced for PHP/Laravel development with easy symbol access
+ * Alphabetic typing preserved (Colemak-DH base)
  */
 
 #include <behaviors.dtsi>
@@ -23,6 +24,200 @@
 #define QUICK_TAP_MS 175
 
 / {
+    // =====================================================
+    // LARAVEL MACROS - Quick access to common patterns
+    // =====================================================
+    macros {
+        // -> (arrow) - Most used in Laravel
+        arrow: arrow_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp MINUS &kp GT>;
+        };
+
+        // => (fat arrow) - Arrays and arrow functions
+        fat_arrow: fat_arrow_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp EQUAL &kp GT>;
+        };
+
+        // :: (double colon) - Static calls
+        dcolon: double_colon_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp COLON &kp COLON>;
+        };
+
+        // {{ }} - Blade echo
+        blade_echo: blade_echo_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp LBRC &kp LBRC &kp SPACE &kp SPACE &kp RBRC &kp RBRC &kp LEFT &kp LEFT &kp LEFT>;
+        };
+
+        // {!! !!} - Blade unescaped
+        blade_raw: blade_raw_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp LBRC &kp EXCL &kp EXCL &kp SPACE &kp SPACE &kp EXCL &kp EXCL &kp RBRC &kp LEFT &kp LEFT &kp LEFT &kp LEFT>;
+        };
+
+        // $this-> - Extremely common in Laravel
+        this_arr: this_arrow_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp DLLR &kp T &kp H &kp I &kp S &kp MINUS &kp GT>;
+        };
+
+        // <?php - PHP open tag
+        php_open: php_open_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp LT &kp QMARK &kp P &kp H &kp P>;
+        };
+
+        // ?> - PHP close tag
+        php_close: php_close_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp QMARK &kp GT>;
+        };
+
+        // ->where( - Common Eloquent
+        where_m: where_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp MINUS &kp GT &kp W &kp H &kp E &kp R &kp E &kp LPAR>;
+        };
+
+        // ->get() - Common Eloquent
+        get_m: get_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp MINUS &kp GT &kp G &kp E &kp T &kp LPAR &kp RPAR>;
+        };
+
+        // ->first() - Common Eloquent
+        first_m: first_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp MINUS &kp GT &kp F &kp I &kp R &kp S &kp T &kp LPAR &kp RPAR>;
+        };
+
+        // !== - Strict not equal
+        strict_neq: strict_not_equal_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp EXCL &kp EQUAL &kp EQUAL>;
+        };
+
+        // === - Strict equal
+        strict_eq: strict_equal_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp EQUAL &kp EQUAL &kp EQUAL>;
+        };
+
+        // ?? - Null coalescing
+        null_coal: null_coalescing_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp QMARK &kp QMARK>;
+        };
+
+        // ?-> - Nullsafe operator (PHP 8)
+        nullsafe: nullsafe_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp QMARK &kp MINUS &kp GT>;
+        };
+
+        // /** - Doc comment open
+        doc_open: doc_comment_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp FSLH &kp STAR &kp STAR>;
+        };
+
+        // */ - Comment close
+        doc_close: doc_close_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp STAR &kp FSLH>;
+        };
+
+        // // - Line comment
+        line_cmt: line_comment_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp FSLH &kp FSLH &kp SPACE>;
+        };
+
+        // @php - Blade PHP directive
+        blade_php: blade_php_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp AT &kp P &kp H &kp P>;
+        };
+
+        // @if( - Blade if
+        blade_if: blade_if_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp AT &kp I &kp F &kp LPAR>;
+        };
+
+        // @foreach( - Blade foreach
+        blade_for: blade_foreach_macro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings = <&kp AT &kp F &kp O &kp R &kp E &kp A &kp C &kp H &kp LPAR>;
+        };
+    };
+
     behaviors {
         // Homerow mods with conservative timing
         hml: homerow_left {
@@ -88,12 +283,30 @@
             bindings = <&kp QMARK>, <&kp EXCL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+
+        // Dollar sign with shift gives @
+        dllr_at: dollar_at_morph {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DLLR>, <&kp AT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // Arrow with shift gives fat arrow
+        arrow_morph: arrow_fat_arrow {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&arrow>, <&fat_arrow>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
     };
 
     combos {
         compatible = "zmk,combos";
 
-        // Essential combos in easy reach
+        // =====================================================
+        // ESSENTIAL COMBOS
+        // =====================================================
         combo_esc {
             key-positions = <1 2>;
             bindings = <&kp ESC>;
@@ -112,7 +325,97 @@
             timeout-ms = <50>;
         };
 
-        // Brackets for programming
+        // =====================================================
+        // LARAVEL-SPECIFIC COMBOS - Optimized for ergonomics
+        // =====================================================
+
+        // $ Dollar sign (A+R positions 10+11) - HOME ROW, MOST USED!
+        combo_dollar {
+            key-positions = <10 11>;
+            bindings = <&kp DLLR>;
+            timeout-ms = <50>;
+        };
+
+        // -> Arrow (T+D on Colemak positions 13+14)
+        combo_arrow {
+            key-positions = <13 14>;
+            bindings = <&arrow>;
+            timeout-ms = <40>;
+        };
+
+        // => Fat Arrow (E+R on Colemak = S+T positions 12+13)
+        combo_fat_arrow {
+            key-positions = <3 4>;
+            bindings = <&fat_arrow>;
+            timeout-ms = <40>;
+        };
+
+        // :: Double Colon (W+F positions 1+2)
+        combo_dcolon {
+            key-positions = <2 3>;
+            bindings = <&dcolon>;
+            timeout-ms = <40>;
+        };
+
+        // $this-> (Z+X positions 20+21)
+        combo_this {
+            key-positions = <20 21>;
+            bindings = <&this_arr>;
+            timeout-ms = <50>;
+        };
+
+        // [] Array brackets (C+V positions 22+23) - For Laravel API arrays
+        combo_lbkt_base {
+            key-positions = <22 23>;
+            bindings = <&kp LBKT>;
+            timeout-ms = <50>;
+        };
+
+        // ] Right bracket (V+B positions 23+24)
+        combo_rbkt_base {
+            key-positions = <23 24>;
+            bindings = <&kp RBKT>;
+            timeout-ms = <50>;
+        };
+
+        // === Strict equal (N+E positions 16+17)
+        combo_strict_eq {
+            key-positions = <7 8>;
+            bindings = <&strict_eq>;
+            timeout-ms = <50>;
+        };
+
+        // !== Strict not equal (E+I positions 17+18)
+        combo_strict_neq {
+            key-positions = <6 7>;
+            bindings = <&strict_neq>;
+            timeout-ms = <50>;
+        };
+
+        // ?? Null coalescing (L+U positions 6+7)
+        combo_null_coal {
+            key-positions = <5 6>;
+            bindings = <&null_coal>;
+            timeout-ms = <50>;
+        };
+
+        // ?-> Nullsafe (Y+' positions 8+9)
+        combo_nullsafe {
+            key-positions = <8 9>;
+            bindings = <&nullsafe>;
+            timeout-ms = <50>;
+        };
+
+        // // Line comment (M+, positions 26+27)
+        combo_line_comment {
+            key-positions = <25 26>;
+            bindings = <&line_cmt>;
+            timeout-ms = <50>;
+        };
+
+        // =====================================================
+        // BRACKETS - Easy access for programming
+        // =====================================================
         combo_lpar {
             key-positions = <15 16>;
             bindings = <&kp LPAR>;
@@ -129,12 +432,14 @@
             key-positions = <25 26>;
             bindings = <&kp LBKT>;
             timeout-ms = <50>;
+            layers = <SYM>;
         };
 
         combo_rbkt {
             key-positions = <26 27>;
             bindings = <&kp RBKT>;
             timeout-ms = <50>;
+            layers = <SYM>;
         };
 
         combo_lbrc {
@@ -149,29 +454,35 @@
             timeout-ms = <50>;
         };
 
-        // Common shortcuts
+        // =====================================================
+        // SHORTCUTS
+        // =====================================================
         combo_copy {
             key-positions = <21 22>;
             bindings = <&kp LC(C)>;
             timeout-ms = <50>;
+            layers = <NAV>;
         };
 
         combo_paste {
             key-positions = <22 23>;
             bindings = <&kp LC(V)>;
             timeout-ms = <50>;
+            layers = <NAV>;
         };
 
         combo_cut {
             key-positions = <20 22>;
             bindings = <&kp LC(X)>;
             timeout-ms = <50>;
+            layers = <NAV>;
         };
 
         combo_undo {
             key-positions = <20 21>;
             bindings = <&kp LC(Z)>;
             timeout-ms = <50>;
+            layers = <NAV>;
         };
 
         combo_save {
@@ -179,17 +490,26 @@
             bindings = <&kp LC(S)>;
             timeout-ms = <50>;
         };
+
+        combo_find {
+            key-positions = <1 2 3>;
+            bindings = <&kp LC(F)>;
+            timeout-ms = <50>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // BASE LAYER - Exactly 38 keys
+        // =====================================================
+        // BASE LAYER - Colemak-DH (unchanged alphabetic)
+        // Exactly 38 keys
+        // =====================================================
         base_layer {
             bindings = <
         // Row 1: 10 keys (0-9)
              &kp Q         &kp W            &kp F         &kp P         &kp G              &kp J                 &kp L         &kp U         &kp Y             &kp SQT
-        // Row 2: 10 keys (10-19)
+        // Row 2: 10 keys (10-19) - Homerow mods
              &kp A         &hml LALT R      &hml LCTRL S  &hml LSHFT T  &hml LGUI D        &hmr LGUI H           &hmr RSHFT N  &hmr RCTRL E  &hmr LALT I       &kp O
         // Row 3: 10 keys (20-29)
              &kp Z         &kp X            &kp C         &kp V         &kp B              &kp K                 &kp M         &comma_morph  &dot_morph        &qexcl
@@ -198,37 +518,55 @@
             >;
         };
 
-        // NAVIGATION LAYER - Exactly 38 keys
+        // =====================================================
+        // NAVIGATION LAYER
+        // Exactly 38 keys
+        // =====================================================
         nav_layer {
             bindings = <
              &kp LA(F4)    &trans           &kp LS(TAB)   &kp TAB       &trans             &kp PG_UP             &kp HOME      &kp UP        &kp END           &kp INS
              &sk LGUI      &sk LALT         &sk LSHFT     &sk LCTRL     &trans             &kp PG_DN             &kp LEFT      &kp DOWN      &kp RIGHT         &kp RET
-             &trans        &trans           &trans        &trans        &trans             &kp CAPS              &kp LC(LEFT)  &kp LC(DOWN)  &kp LC(RIGHT)     &kp DEL
+             &kp LC(Z)     &kp LC(X)        &kp LC(C)     &kp LC(V)     &kp LC(Y)          &kp CAPS              &kp LC(LEFT)  &kp LC(DOWN)  &kp LC(RIGHT)     &kp DEL
                                             &trans        &trans        &trans             &trans                &trans        &kp K_CANCEL  &trans            &trans
             >;
         };
 
-        // NUMBER LAYER - Exactly 38 keys
+        // =====================================================
+        // NUMBER LAYER - Numbers and common operators
+        // Exactly 38 keys
+        // =====================================================
         num_layer {
             bindings = <
              &kp N1        &kp N2           &kp N3        &kp N4        &kp N5             &kp N6                &kp N7        &kp N8        &kp N9            &kp N0
-             &hml LGUI N0  &hml LALT N4     &hml LCTRL N5 &hml LSHFT N6 &kp PLUS           &kp EQUAL             &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6      &kp DOT
-             &kp COMMA     &kp N1           &kp N2        &kp N3        &kp STAR           &kp FSLH              &kp N1        &kp N2        &kp N3            &kp MINUS
+             &hml LGUI N0  &hml LALT DOT    &hml LCTRL COMMA &hml LSHFT EQUAL &kp PLUS     &kp MINUS             &hmr RSHFT N4 &hmr RCTRL N5 &hmr LALT N6      &kp STAR
+             &kp GRAVE     &kp N1           &kp N2        &kp N3        &kp DLLR           &kp FSLH              &kp N1        &kp N2        &kp N3            &kp PRCNT
                                             &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
             >;
         };
 
-        // SYMBOL LAYER - Exactly 38 keys
+        // =====================================================
+        // SYMBOL LAYER - OPTIMIZED FOR LARAVEL
+        // Row 1: $ @ first (most used in PHP/Laravel)
+        // Original structure preserved, Laravel symbols prioritized
+        // Exactly 38 keys
+        // =====================================================
         sym_layer {
             bindings = <
-             &kp EXCL      &kp AT           &kp HASH      &kp DLLR      &kp PRCNT          &kp CARET             &kp AMPS      &kp STAR      &kp LPAR          &kp RPAR
+        // Row 1: $ and @ FIRST (Laravel critical), then standard symbols
+             &kp DLLR      &kp AT           &kp HASH      &kp PRCNT     &kp CARET          &kp AMPS              &kp STAR      &kp LPAR      &kp RPAR          &kp EXCL
+        // Row 2: Operators and brackets (no homerow mod interference)
              &kp GRAVE     &kp MINUS        &kp PLUS      &kp EQUAL     &kp COLON          &kp PIPE              &kp LBRC      &kp RBRC      &kp LBKT          &kp RBKT
+        // Row 3: Underscore accessible, slashes, quotes
              &kp TILDE     &kp UNDER        &kp BSLH      &kp FSLH      &kp SEMI           &kp LT                &kp GT        &kp SQT       &kp DQT           &kp QMARK
-                                            &trans        &trans        &trans             &trans                &trans        &trans        &trans            &trans
+        // Thumbs: Laravel macros for instant access
+                                            &arrow        &fat_arrow    &dcolon            &blade_echo           &trans        &this_arr     &null_coal        &nullsafe
             >;
         };
 
-        // FUNCTION LAYER - Exactly 38 keys
+        // =====================================================
+        // FUNCTION LAYER - F-keys and media
+        // Exactly 38 keys
+        // =====================================================
         fn_layer {
             bindings = <
              &kp F12       &kp F7           &kp F8        &kp F9        &kp PRINTSCREEN    &kp C_VOL_UP          &kp C_PREV    &kp C_PP      &kp C_NEXT        &kp C_BRI_UP
@@ -238,7 +576,10 @@
             >;
         };
 
-        // SYSTEM LAYER - Exactly 38 keys
+        // =====================================================
+        // SYSTEM LAYER - Bluetooth and system controls
+        // Exactly 38 keys
+        // =====================================================
         sys_layer {
             bindings = <
              &bt BT_SEL 0  &bt BT_SEL 1     &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR         &trans                &trans        &trans        &trans            &trans
