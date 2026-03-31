@@ -463,15 +463,16 @@
 
         // =========================================================
         // FUNCTION LAYER
-        // Bluetooth shortcuts live on the thumb cluster here so you
-        // can hold FN and manage pairing/output without using SYS.
+        // Bluetooth shortcuts use the actual 6-key thumb cluster here.
+        // Hold FN, then use the colored thumbs for USB/BLE and BT 0/1/2.
+        // BT slot 3 and BT clear stay on the top row as fallback.
         // =========================================================
         fn_layer {
             bindings = <
-             &kp F12       &kp F7           &kp F8        &kp F9        &kp PRINTSCREEN    &kp C_VOL_UP          &kp C_PREV    &kp C_PP      &kp C_NEXT        &kp C_BRI_UP
+             &bt BT_SEL 3  &bt BT_CLR      &kp F8        &kp F9        &kp PRINTSCREEN    &kp C_VOL_UP          &kp C_PREV    &kp C_PP      &kp C_NEXT        &kp C_BRI_UP
              &kp F11       &kp F4           &kp F5        &kp F6        &kp SCROLLLOCK     &kp C_VOL_DN          &kp C_MUTE    &trans        &trans            &kp C_BRI_DN
              &kp F10       &kp F1           &kp F2        &kp F3        &kp PAUSE_BREAK    &trans                &trans        &trans        &trans            &trans
-                                            &out OUT_USB  &out OUT_BLE  &trans             &bt BT_SEL 0          &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3      &bt BT_CLR
+                                            &trans        &trans        &out OUT_USB       &out OUT_BLE          &trans        &bt BT_SEL 0  &bt BT_SEL 1      &bt BT_SEL 2
             >;
         };
 
