@@ -405,11 +405,13 @@
 
         // =========================================================
         // NAVIGATION LAYER
+        // Left-hand Bluetooth shortcuts:
+        // hold left yellow thumb (NAV), then use left-hand alpha keys.
         // =========================================================
         nav_layer {
             bindings = <
-             &kp LA(F4)    &trans           &kp LS(TAB)   &kp TAB       &trans             &kp PG_UP             &kp HOME      &kp UP        &kp END           &kp INS
-             &sk LGUI      &sk LALT         &sk LSHFT     &sk LCTRL     &trans             &kp PG_DN             &kp LEFT      &kp DOWN      &kp RIGHT         &kp RET
+             &out OUT_USB  &bt BT_SEL 3     &kp LS(TAB)   &kp TAB       &trans             &kp PG_UP             &kp HOME      &kp UP        &kp END           &kp INS
+             &out OUT_BLE  &bt BT_SEL 0     &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_CLR         &kp PG_DN             &kp LEFT      &kp DOWN      &kp RIGHT         &kp RET
              &kp LC(Z)     &kp LC(X)        &kp LC(C)     &kp LC(V)     &kp LC(Y)          &kp CAPS              &kp LC(LEFT)  &kp LC(DOWN)  &kp LC(RIGHT)     &kp DEL
                                             &trans        &trans        &trans             &trans                &trans        &kp K_CANCEL  &trans            &trans
             >;
